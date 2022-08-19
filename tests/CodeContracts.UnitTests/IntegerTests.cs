@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace CodeContracts.UnitTests
 {
-    public class NumberTests
+    public class IntegerTests
     {
         [Theory]
         [InlineData(int.MaxValue, false)]
@@ -16,20 +16,6 @@ namespace CodeContracts.UnitTests
         [InlineData(-1, true)]
         [InlineData(int.MinValue, true)]
         public void Positive_Requirement_Successful_Asserts_Int(int number, bool throws)
-        {
-            var exception = Record.Exception(() =>
-                Contract.For(number).Positive().Ok());
-
-            (exception != null).Should().Be(throws);
-        }
-
-        [Theory]
-        [InlineData(double.MaxValue, false)]
-        [InlineData(1.0, false)]
-        [InlineData(0.0, false)]
-        [InlineData(-1.0, true)]
-        [InlineData(double.MinValue, true)]
-        public void Positive_Requirement_Successful_Asserts_Double(double number, bool throws)
         {
             var exception = Record.Exception(() =>
                 Contract.For(number).Positive().Ok());
