@@ -7,7 +7,7 @@ using FluentAssertions;
 
 namespace CodeContracts.UnitTests
 {
-    public class Tests
+    public class NullableTests
     {
         [Fact]
         public void NotNull_Requirement_When_Null_Fails()
