@@ -22,5 +22,19 @@ namespace CodeContracts.UnitTests
 
             (exception != null).Should().Be(throws);
         }
+
+        [Theory]
+        [InlineData(int.MaxValue, true)]
+        [InlineData(1, true)]
+        [InlineData(0, true)]
+        [InlineData(-1, false)]
+        [InlineData(int.MinValue, false)]
+        public void Negative_Requirement_Successful_Asserts_Int(int number, bool throws)
+        {
+            var exception = Record.Exception(() =>
+                Contract.For(number).Negative().Ok());
+
+            (exception != null).Should().Be(throws);
+        }
     }
 }
