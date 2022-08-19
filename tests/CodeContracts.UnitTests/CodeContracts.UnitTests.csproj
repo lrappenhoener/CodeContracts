@@ -21,4 +21,10 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\CodeContracts\CodeContracts.csproj" />
+  </ItemGroup>
+
+
+
 </Project>
