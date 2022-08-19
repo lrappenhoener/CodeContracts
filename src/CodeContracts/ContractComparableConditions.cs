@@ -28,6 +28,12 @@ public class ContractComparableConditions<T> where T : IComparable
         return this;
     }
 
+    public ContractComparableConditions<T> InRange(IComparable min, IComparable max)
+    {
+        UpdateConditions(i => i.CompareTo(min) >= 0 && i.CompareTo(max) <= 0);
+        return this;
+    }
+
     public void Ok()
     {
         if (_condition == null) return;
@@ -47,4 +53,5 @@ public class ContractComparableConditions<T> where T : IComparable
         var secondCondition = second.Compile();
         return o => firstCondition(o) && secondCondition(o);
     }
+    
 }
