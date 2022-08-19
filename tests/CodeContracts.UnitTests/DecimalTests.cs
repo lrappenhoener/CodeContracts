@@ -4,14 +4,24 @@ public class DecimalTests : ComparableTests<Decimal>
 {
     protected override IEnumerable<Decimal> PositiveValues { get; } = new List<Decimal>
     {
-        0,
-        1,
+        0m,
+        1m,
         Decimal.MaxValue
     };
 
     protected override IEnumerable<Decimal> NegativeValues { get; } = new List<Decimal>
     {
-        -1,
+        -1m,
         Decimal.MinValue
+    };
+
+    protected override IEnumerable<Range> RangesThatAreValid { get; } = new List<Range>
+    {
+        new Range(0m, 0m, 1m),
+        new Range(0m, -1m, 0m),
+        new Range(-1m, -1m, 0m),
+        new Range(-1m, -1m, 1m),
+        new Range(Decimal.MinValue, Decimal.MinValue, 1m),
+        new Range(Decimal.MaxValue, Decimal.MaxValue - 1m, Decimal.MaxValue),
     };
 }

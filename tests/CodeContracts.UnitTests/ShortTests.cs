@@ -14,4 +14,14 @@ public class ShortTests : ComparableTests<short>
         -1,
         short.MinValue
     };
+
+    protected override IEnumerable<Range> RangesThatAreValid { get; } = new List<Range>
+    {
+        new Range((short)0, (short)0, (short)1),
+        new Range((short)0, (short)-1, (short)0),
+        new Range((short)-1, (short)-1, (short)0),
+        new Range((short)-1, (short)-1, (short)1),
+        new Range(short.MinValue, short.MinValue, (short)1),
+        new Range(short.MaxValue, (short)(short.MaxValue - 1), short.MaxValue),
+    };
 }
