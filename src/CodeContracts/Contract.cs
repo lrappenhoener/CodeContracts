@@ -1,4 +1,6 @@
-﻿namespace CodeContracts;
+﻿using System;
+
+namespace CodeContracts;
 
 public static class Contract
 {
@@ -7,13 +9,8 @@ public static class Contract
         return new ContractConditions(target);
     }
 
-    public static ContractComparableConditions<int> For(int target)
+    public static ContractComparableConditions<IComparable> For(IComparable target)
     {
-        return new ContractComparableConditions<int>(target);
-    }
-
-    public static ContractComparableConditions<double> For(double target)
-    {
-        return new ContractComparableConditions<double>(target);
+        return new ContractComparableConditions<IComparable>(target);
     }
 }
