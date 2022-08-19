@@ -17,4 +17,18 @@ public class DoubleTests
 
         (exception != null).Should().Be(throws);
     }
+
+    [Theory]
+    [InlineData(double.MaxValue, true)]
+    [InlineData(1.0, true)]
+    [InlineData(0.0, true)]
+    [InlineData(-1.0, false)]
+    [InlineData(double.MinValue, false)]
+    public void Negative_Requirement_Successful_Asserts_Double(double number, bool throws)
+    {
+        var exception = Record.Exception(() =>
+            Contract.For(number).Negative().Ok());
+
+        (exception != null).Should().Be(throws);
+    }
 }
