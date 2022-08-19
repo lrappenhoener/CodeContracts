@@ -18,5 +18,13 @@ namespace CodeContracts.UnitTests
             exception.Should().NotBeNull();
         }
 
+        [Fact]
+        public void NotNull_Requirement_When_NotNull_Successful()
+        {
+            var target = new object();
+            var exception = Record.Exception(() => Contract.For(target).NotNull().Ok());
+
+            exception.Should().BeNull();
+        }
     }
 }
