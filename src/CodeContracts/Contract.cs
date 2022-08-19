@@ -7,13 +7,13 @@ public static class Contract
         return new ContractConditions(target);
     }
 
-    public static ContractIntConditions For(int target)
+    public static ContractComparableConditions<int> For(int target)
     {
-        return new ContractIntConditions(target);
+        return new ContractComparableConditions<int>(target);
     }
 
-    public static ContractDoubleConditions For(double target)
+    public static ContractComparableConditions<double> For(double target)
     {
-        return new ContractDoubleConditions(target);
+        return new ContractComparableConditions<double>(target);
     }
 }
