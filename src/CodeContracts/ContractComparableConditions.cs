@@ -8,21 +8,23 @@ public class ContractComparableConditions<T> where T : IComparable
 {
     private readonly T _target;
     private Expression<Func<T, bool>>? _condition;
+    private readonly T _default;
 
     public ContractComparableConditions(T target)
     {
         _target = target;
+        _default = (T)Activator.CreateInstance(_target.GetType());
     }
 
     public ContractComparableConditions<T> Positive()
     {
-        UpdateConditions(i => i.CompareTo(default(T)) >= 0);
+        UpdateConditions(i => i.CompareTo(_default) >= 0);
         return this;
     }
 
     public ContractComparableConditions<T> Negative()
     {
-        UpdateConditions(i => i.CompareTo(default(T)) < 0);
+        UpdateConditions(i => i.CompareTo(_default) < 0);
         return this;
     }
 
