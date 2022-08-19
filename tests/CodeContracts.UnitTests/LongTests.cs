@@ -24,4 +24,12 @@ public class LongTests : ComparableTests<long>
         new Range(long.MinValue, long.MinValue, 1L),
         new Range(long.MaxValue, long.MaxValue - 1L, long.MaxValue),
     };
+
+    protected override IEnumerable<Range> RangesThatAreInvalid { get; } = new List<Range>
+    {
+        new Range(0L, 1L, long.MaxValue),
+        new Range(0L, long.MinValue, -1L),
+        new Range(long.MaxValue, long.MinValue, long.MaxValue - 1L),
+        new Range(long.MinValue, long.MinValue + 1L, long.MaxValue),
+    };
 }

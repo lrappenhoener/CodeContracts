@@ -26,4 +26,10 @@ public class DoubleTests : ComparableTests<double>
         new Range(double.MinValue, double.MinValue, 1.0),
         new Range(double.MaxValue, double.MaxValue - 1.0, double.MaxValue),
     };
+
+    protected override IEnumerable<Range> RangesThatAreInvalid { get; } = new List<Range>
+    {
+        new Range(0.0, 0.0001d, double.MaxValue),
+        new Range(0.0, double.MinValue, -0.0001d),
+    };
 }

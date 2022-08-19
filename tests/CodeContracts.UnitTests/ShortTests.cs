@@ -24,4 +24,12 @@ public class ShortTests : ComparableTests<short>
         new Range(short.MinValue, short.MinValue, (short)1),
         new Range(short.MaxValue, (short)(short.MaxValue - 1), short.MaxValue),
     };
+
+    protected override IEnumerable<Range> RangesThatAreInvalid { get; } = new List<Range>
+    {
+        new Range((short)0, (short)1, short.MaxValue),
+        new Range((short)0, short.MinValue, (short)-1),
+        new Range(short.MaxValue, short.MinValue, short.MaxValue - (short)1),
+        new Range(short.MinValue, short.MinValue + (short)1, short.MaxValue),
+    };
 }

@@ -31,5 +31,13 @@ namespace CodeContracts.UnitTests
             new Range(int.MinValue, int.MinValue, 1),
             new Range(int.MaxValue, int.MaxValue - 1, int.MaxValue),
         };
+
+        protected override IEnumerable<Range> RangesThatAreInvalid { get; } = new List<Range>
+        {
+            new Range(0, 1, int.MaxValue),
+            new Range(0, int.MinValue, -1),
+            new Range(int.MaxValue, int.MinValue, int.MaxValue - 1),
+            new Range(int.MinValue, int.MinValue + 1, int.MaxValue),
+        };
     }
 }
