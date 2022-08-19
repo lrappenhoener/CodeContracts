@@ -11,4 +11,9 @@ public static class Contract
     {
         return new ContractIntConditions(target);
     }
+
+    public static ContractDoubleConditions For(double target)
+    {
+        return new ContractDoubleConditions(target);
+    }
 }
