@@ -43,7 +43,7 @@ namespace CodeContracts.UnitTests
         [InlineData("     ", true)]
         public void NotNullEmptyWhitespace_Requirement_Successful_Asserts(string value, bool throws)
         {
-            var exception = Record.Exception(() => Contract.For(value).NotNullEmptyWhitespace().Ok());
+            var exception = Record.Exception(() => Contract.For(value).NotNullOrEmptyOrWhitespace().Ok());
 
             var hasThrown = exception != null;
             hasThrown.Should().Be(throws);
