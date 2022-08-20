@@ -26,7 +26,7 @@ public class ContractStringConditions
         return this;
     }
 
-    public ContractStringConditions NotNullEmptyWhitespace()
+    public ContractStringConditions NotNullOrEmptyOrWhitespace()
     {
         UpdateConditions(o => !string.IsNullOrWhiteSpace(o));
         return this;
