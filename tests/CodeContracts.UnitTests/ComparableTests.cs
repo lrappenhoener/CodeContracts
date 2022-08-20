@@ -59,8 +59,11 @@ public abstract class ComparableTests<T> where T : IComparable
         LesserValuesThatAreInvalid = new List<Compare>
         {
             new Compare(Positive, Zero),
+            new Compare(Positive, Positive),
             new Compare(Zero, Negative),
+            new Compare(Zero, Zero),
             new Compare(Max, Positive),
+            new Compare(Max, Max),
         };
 
         GreaterValuesThatAreValid = new List<Compare>
@@ -73,8 +76,13 @@ public abstract class ComparableTests<T> where T : IComparable
         GreaterValuesThatAreInvalid = new List<Compare>
         {
             new Compare(Zero, Positive),
+            new Compare(Zero, Zero),
             new Compare(Negative, Zero),
+            new Compare(Negative, Negative),
             new Compare(Positive, Max),
+            new Compare(Positive, Positive),
+            new Compare(Max, Max),
+            new Compare(Min, Min),
         };
     }
 
