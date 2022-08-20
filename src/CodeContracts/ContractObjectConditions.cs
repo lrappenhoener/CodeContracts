@@ -16,20 +16,8 @@ public class ContractObjectConditions
 
     public ContractObjectConditions NotNull()
     {
-        UpdateConditions(o => o != null);
+        _condition = (o => o != null);
         return this;
-    }
-
-    private void UpdateConditions(Expression<Func<object?, bool>> condition)
-    {
-        _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
-    }
-
-    private Expression<Func<object?, bool>> CreateAndExpression(Expression<Func<object?, bool>> first, Expression<Func<object?, bool>> second)
-    {
-        var firstCondition = first.Compile();
-        var secondCondition = second.Compile();
-        return o => firstCondition(o) && secondCondition(o);
     }
 
     public void Ok()
