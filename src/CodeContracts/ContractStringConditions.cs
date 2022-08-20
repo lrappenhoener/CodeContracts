@@ -37,7 +37,8 @@ public class ContractStringConditions
         _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
     }
 
-    private Expression<Func<string?, bool>> CreateAndExpression(Expression<Func<string?, bool>> first, Expression<Func<string?, bool>> second)
+    private Expression<Func<string?, bool>> CreateAndExpression(Expression<Func<string?, bool>> first,
+        Expression<Func<string?, bool>> second)
     {
         var firstCondition = first.Compile();
         var secondCondition = second.Compile();
@@ -50,6 +51,4 @@ public class ContractStringConditions
         var compiled = _condition.Compile();
         Debug.Assert(compiled.Invoke(_target));
     }
-
-    
 }

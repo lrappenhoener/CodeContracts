@@ -6,9 +6,9 @@ namespace CodeContracts;
 
 public class ContractComparableConditions<T> where T : IComparable
 {
+    private readonly T _default;
     private readonly T _target;
     private Expression<Func<T, bool>>? _condition;
-    private readonly T _default;
 
     public ContractComparableConditions(T target)
     {
@@ -36,25 +36,25 @@ public class ContractComparableConditions<T> where T : IComparable
 
     public ContractComparableConditions<T> Lesser(IComparable max)
     {
-        UpdateConditions((i) => i.CompareTo(max) < 0);
+        UpdateConditions(i => i.CompareTo(max) < 0);
         return this;
     }
 
     public ContractComparableConditions<T> LesserEquals(IComparable other)
     {
-        UpdateConditions((i) => i.CompareTo(other) <= 0);
+        UpdateConditions(i => i.CompareTo(other) <= 0);
         return this;
     }
 
     public ContractComparableConditions<T> Greater(IComparable other)
     {
-        UpdateConditions((i) => i.CompareTo(other) > 0);
+        UpdateConditions(i => i.CompareTo(other) > 0);
         return this;
     }
 
     public ContractComparableConditions<T> GreaterEquals(IComparable other)
     {
-        UpdateConditions((i) => i.CompareTo(other) >= 0);
+        UpdateConditions(i => i.CompareTo(other) >= 0);
         return this;
     }
 

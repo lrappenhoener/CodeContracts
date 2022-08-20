@@ -14,7 +14,7 @@ public static class Contract
     {
         return new ContractComparableConditions<IComparable>(target);
     }
-    
+
     public static ContractStringConditions For(string target)
     {
         return new ContractStringConditions(target);

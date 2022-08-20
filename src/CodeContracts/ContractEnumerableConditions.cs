@@ -38,7 +38,8 @@ public class ContractEnumerableConditions
         _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
     }
 
-    private Expression<Func<IEnumerable?, bool>> CreateAndExpression(Expression<Func<IEnumerable?, bool>> first, Expression<Func<IEnumerable?, bool>> second)
+    private Expression<Func<IEnumerable?, bool>> CreateAndExpression(Expression<Func<IEnumerable?, bool>> first,
+        Expression<Func<IEnumerable?, bool>> second)
     {
         var firstCondition = first.Compile();
         var secondCondition = second.Compile();

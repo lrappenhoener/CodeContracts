@@ -16,7 +16,7 @@ public class ContractObjectConditions
 
     public ContractObjectConditions NotNull()
     {
-        _condition = (o => o != null);
+        _condition = o => o != null;
         return this;
     }
 
