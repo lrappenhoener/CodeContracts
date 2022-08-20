@@ -40,6 +40,12 @@ public class ContractComparableConditions<T> where T : IComparable
         return this;
     }
 
+    public ContractComparableConditions<T> Greater(IComparable other)
+    {
+        UpdateConditions((i) => i.CompareTo(other) > 0);
+        return this;
+    }
+
     public void Ok()
     {
         if (_condition == null) return;
