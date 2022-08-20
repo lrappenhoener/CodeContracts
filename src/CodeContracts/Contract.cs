@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace CodeContracts;
 
@@ -17,5 +18,10 @@ public static class Contract
     public static ContractStringConditions For(string target)
     {
         return new ContractStringConditions(target);
+    }
+
+    public static ContractEnumerableConditions For(IEnumerable target)
+    {
+        return new ContractEnumerableConditions(target);
     }
 }
