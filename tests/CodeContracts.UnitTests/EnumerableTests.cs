@@ -19,5 +19,15 @@ namespace CodeContracts.UnitTests
 
             exception.Should().NotBeNull();
         }
+
+        [Fact]
+        public void NotNull_Requirement_When_Not_Null_Does_Not_Throw()
+        {
+            IEnumerable enumerable = new ArrayList();
+
+            var exception = Record.Exception(() => Contract.For(enumerable).NotNull().Ok());
+
+            exception.Should().BeNull();
+        }
     }
 }
