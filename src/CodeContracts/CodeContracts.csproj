@@ -5,5 +5,11 @@
 	  <LangVersion>10</LangVersion>
 	  <Nullable>Enable</Nullable>
 	  <RootNamespace>PCC.Libraries.CodeContracts</RootNamespace>
+	  <Version>0.0.1</Version>
   </PropertyGroup>
+
+	<PropertyGroup Condition="$(Configuration) == 'Release'">
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageOutputPath>g:\Packages\Private\</PackageOutputPath>
+	</PropertyGroup>
 </Project>
