@@ -12,6 +12,8 @@ namespace CodeContracts.UnitTests
         [Theory]
         [InlineData("Foo", false)]
         [InlineData(null, true)]
+        [InlineData("", false)]
+        [InlineData("  ", false)]
         public void NotNull_Requirement_Successful_Asserts(string value, bool throws)
         {
             var exception = Record.Exception(() => Contract.For(value).NotNull().Ok());
@@ -24,6 +26,7 @@ namespace CodeContracts.UnitTests
         [InlineData("Foo", false)]
         [InlineData(null, true)]
         [InlineData("", true)]
+        [InlineData("  ", false)]
         public void NotNullOrEmpty_Requirement_Successful_Asserts(string value, bool throws)
         {
             var exception = Record.Exception(() => Contract.For(value).NotNullOrEmpty().Ok());
