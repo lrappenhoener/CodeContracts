@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace CodeContracts;
+namespace PCC.Libraries.CodeContracts;
 
 public static class Contract
 {

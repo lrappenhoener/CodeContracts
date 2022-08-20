@@ -3,7 +3,7 @@ using System.Collections;
 using System.Diagnostics;
 using System.Linq.Expressions;
 
-namespace CodeContracts;
+namespace PCC.Libraries.CodeContracts;
 
 public class ContractEnumerableConditions
 {
