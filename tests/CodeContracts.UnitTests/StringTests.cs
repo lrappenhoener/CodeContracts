@@ -76,6 +76,16 @@ namespace CodeContracts.UnitTests
 
             exception.Should().NotBeNull();
         }
-        
+
+        [Fact]
+        public void Ok_With_No_Requirements_Not_Throws()
+        {
+            string target = null;
+
+            var exception = Record.Exception(() =>
+                Contract.For(target).Ok());
+
+            exception.Should().BeNull();
+        }
     }
 }
