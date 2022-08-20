@@ -4,7 +4,7 @@
 		<TargetFramework>netstandard2.0</TargetFramework>
 		<LangVersion>10</LangVersion>
 		<Nullable>Enable</Nullable>
-		<RootNamespace>PCC.Libraries.CodeContracts</RootNamespace>
+		<RootNamespace>CodeContracts</RootNamespace>
 		<Version>0.0.1</Version>
 	</PropertyGroup>
 

@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using PCC.Libraries.CodeContracts;
 
 // ReSharper disable VirtualMemberCallInConstructor
 

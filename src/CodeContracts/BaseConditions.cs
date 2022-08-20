@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Linq.Expressions;
 
-namespace PCC.Libraries.CodeContracts;
+namespace CodeContracts;
 
 public abstract class BaseConditions<T>
 {

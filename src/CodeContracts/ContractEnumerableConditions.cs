@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace PCC.Libraries.CodeContracts;
+namespace CodeContracts;
 
 public sealed class ContractEnumerableConditions : BaseConditions<IEnumerable?>
 {

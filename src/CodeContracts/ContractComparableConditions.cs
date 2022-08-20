@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PCC.Libraries.CodeContracts;
+namespace CodeContracts;
 
 public sealed class ContractComparableConditions<T> : BaseConditions<T> where T : IComparable
 {

@@ -1,4 +1,4 @@
-﻿namespace PCC.Libraries.CodeContracts;
+﻿namespace CodeContracts;
 
 public sealed class ContractStringConditions : BaseConditions<string?>
 {
