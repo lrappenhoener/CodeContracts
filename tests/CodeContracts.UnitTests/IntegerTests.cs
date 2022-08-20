@@ -9,35 +9,10 @@ namespace CodeContracts.UnitTests
 {
     public class IntegerTests : ComparableTests<int>
     {
-        protected override IEnumerable<int> PositiveValues { get; } = new List<int>
-        {
-            0,
-            1,
-            int.MaxValue
-        };
-
-        protected override IEnumerable<int> NegativeValues { get; } = new List<int>
-        {
-            -1,
-            int.MinValue
-        };
-
-        protected override IEnumerable<Range> RangesThatAreValid { get; } = new List<Range>
-        {
-            new Range(0, 0, 1),
-            new Range(0, -1, 0),
-            new Range(-1, -1, 0),
-            new Range(-1, -1, 1),
-            new Range(int.MinValue, int.MinValue, 1),
-            new Range(int.MaxValue, int.MaxValue - 1, int.MaxValue),
-        };
-
-        protected override IEnumerable<Range> RangesThatAreInvalid { get; } = new List<Range>
-        {
-            new Range(0, 1, int.MaxValue),
-            new Range(0, int.MinValue, -1),
-            new Range(int.MaxValue, int.MinValue, int.MaxValue - 1),
-            new Range(int.MinValue, int.MinValue + 1, int.MaxValue),
-        };
+        protected override int Zero => 0;
+        protected override int Positive => 1;
+        protected override int Negative => -1;
+        protected override int Max => int.MaxValue;
+        protected override int Min => int.MinValue;
     }
 }

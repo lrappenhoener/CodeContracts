@@ -4,10 +4,55 @@ namespace CodeContracts.UnitTests;
 
 public abstract class ComparableTests<T> where T : IComparable
 {
-    protected abstract IEnumerable<T> PositiveValues { get; }
-    protected abstract IEnumerable<T> NegativeValues { get; }
-    protected abstract IEnumerable<Range> RangesThatAreValid { get; }
-    protected abstract IEnumerable<Range> RangesThatAreInvalid { get; }
+    protected abstract T Zero { get; }
+    protected abstract T Positive { get; }
+    protected abstract T Negative { get; }
+    protected abstract T Max { get; }
+    protected abstract T Min { get; }
+    
+    protected IEnumerable<T> PositiveValues { get; }
+    protected IEnumerable<T> NegativeValues { get; } 
+    protected IEnumerable<Range> RangesThatAreValid { get; } 
+    protected IEnumerable<Range> RangesThatAreInvalid { get; } 
+    protected IEnumerable<Compare> LesserValuesThatAreValid { get; } 
+
+    protected ComparableTests()
+    {
+        PositiveValues = new List<T>
+        {
+            Zero,
+            Positive,
+            Max
+        };
+        
+        NegativeValues = new List<T>
+        {
+            Negative,
+            Min
+        };
+
+        RangesThatAreValid = new List<Range>
+        {
+            new Range(Zero, Negative, Positive),
+            new Range(Zero, Min, Max),
+            new Range(Positive, Negative, Positive),
+            new Range(Negative, Negative, Positive),
+            new Range(Negative, Min, Positive),
+        };
+
+        RangesThatAreInvalid = new List<Range>
+        {
+            new Range(Zero, Positive, Max),
+            new Range(Zero, Min, Negative),
+        };
+
+        LesserValuesThatAreValid = new List<Compare>
+        {
+            new Compare(Zero, Positive),
+            new Compare(Negative, Zero),
+            new Compare(Positive, Max),
+        };
+    }
 
     [Fact]
     public void Positive_Requirement_Successful_Asserts_Positive_Values()
@@ -74,6 +119,16 @@ public abstract class ComparableTests<T> where T : IComparable
         {
             var exception = Record.Exception(() => Contract.For(range.Value).InRange(range.Min, range.Max).Ok());
             exception.Should().NotBeNull();
+        }
+    }
+
+    [Fact]
+    public void Lesser_Requirement_Successful_Asserts_LesserValues()
+    {
+        foreach (var lesser in LesserValuesThatAreValid)
+        {
+            var exception = Record.Exception(() => Contract.For(lesser.Value).Lesser(lesser.Max).Ok());
+            exception.Should().BeNull();
         }
     }
 }
