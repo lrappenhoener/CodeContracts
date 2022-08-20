@@ -1,29 +1,17 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq.Expressions;
+﻿namespace PCC.Libraries.CodeContracts;
 
-namespace PCC.Libraries.CodeContracts;
-
-public class ContractObjectConditions
+public sealed class ContractObjectConditions : BaseConditions<object?>
 {
-    private readonly object? _target;
-    private Expression<Func<object?, bool>>? _condition;
-
     public ContractObjectConditions(object? target)
     {
-        _target = target;
+        Target = target;
     }
+
+    protected override object? Target { get; }
 
     public ContractObjectConditions NotNull()
     {
-        _condition = o => o != null;
+        UpdateConditions(o => o != null);
         return this;
-    }
-
-    public void Ok()
-    {
-        if (_condition == null) return;
-        var compiled = _condition.Compile();
-        Debug.Assert(compiled.Invoke(_target));
     }
 }
