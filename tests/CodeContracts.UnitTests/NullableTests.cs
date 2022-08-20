@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 namespace CodeContracts.UnitTests
 {
@@ -23,6 +18,17 @@ namespace CodeContracts.UnitTests
         {
             var target = new object();
             var exception = Record.Exception(() => Contract.For(target).NotNull().Ok());
+
+            exception.Should().BeNull();
+        }
+
+        [Fact]
+        public void Ok_With_No_Requirements_Not_Throws()
+        {
+            object target = null;
+
+            var exception = Record.Exception(() =>
+                Contract.For(target).Ok());
 
             exception.Should().BeNull();
         }
