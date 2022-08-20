@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-
-namespace CodeContracts.UnitTests;
+﻿namespace CodeContracts.UnitTests;
 
 public class DoubleTests : ComparableTests<double>
 {

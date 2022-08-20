@@ -15,12 +15,12 @@ public static class Contract
         return new ContractComparableConditions<IComparable>(target);
     }
 
-    public static ContractStringConditions For(string target)
+    public static ContractStringConditions For(string? target)
     {
         return new ContractStringConditions(target);
     }
 
-    public static ContractEnumerableConditions For(IEnumerable target)
+    public static ContractEnumerableConditions For(IEnumerable? target)
     {
         return new ContractEnumerableConditions(target);
     }

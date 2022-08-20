@@ -1,29 +1,12 @@
 ﻿using FluentAssertions;
 using PCC.Libraries.CodeContracts;
 
+// ReSharper disable VirtualMemberCallInConstructor
+
 namespace CodeContracts.UnitTests;
 
 public abstract class ComparableTests<T> where T : IComparable
 {
-    protected abstract T Zero { get; }
-    protected abstract T Positive { get; }
-    protected abstract T Negative { get; }
-    protected abstract T Max { get; }
-    protected abstract T Min { get; }
-    
-    protected IEnumerable<T> PositiveValues { get; }
-    protected IEnumerable<T> NegativeValues { get; } 
-    protected IEnumerable<Range> RangesThatAreValid { get; } 
-    protected IEnumerable<Range> RangesThatAreInvalid { get; } 
-    protected IEnumerable<Compare> LesserValuesThatAreValid { get; } 
-    protected IEnumerable<Compare> LesserValuesThatAreInvalid { get; } 
-    protected IEnumerable<Compare> LesserEqualsValuesThatAreValid { get; } 
-    protected IEnumerable<Compare> LesserEqualsValuesThatAreInvalid { get; } 
-    protected IEnumerable<Compare> GreaterValuesThatAreValid { get; } 
-    protected IEnumerable<Compare> GreaterValuesThatAreInvalid { get; } 
-    protected IEnumerable<Compare> GreaterEqualsValuesThatAreValid { get; } 
-    protected IEnumerable<Compare> GreaterEqualsValuesThatAreInvalid { get; } 
-
     protected ComparableTests()
     {
         PositiveValues = new List<T>
@@ -32,7 +15,7 @@ public abstract class ComparableTests<T> where T : IComparable
             Positive,
             Max
         };
-        
+
         NegativeValues = new List<T>
         {
             Negative,
@@ -41,92 +24,111 @@ public abstract class ComparableTests<T> where T : IComparable
 
         RangesThatAreValid = new List<Range>
         {
-            new Range(Zero, Negative, Positive),
-            new Range(Zero, Min, Max),
-            new Range(Positive, Negative, Positive),
-            new Range(Negative, Negative, Positive),
-            new Range(Negative, Min, Positive),
+            new(Zero, Negative, Positive),
+            new(Zero, Min, Max),
+            new(Positive, Negative, Positive),
+            new(Negative, Negative, Positive),
+            new(Negative, Min, Positive)
         };
 
         RangesThatAreInvalid = new List<Range>
         {
-            new Range(Zero, Positive, Max),
-            new Range(Zero, Min, Negative),
+            new(Zero, Positive, Max),
+            new(Zero, Min, Negative)
         };
 
         LesserValuesThatAreValid = new List<Compare>
         {
-            new Compare(Zero, Positive),
-            new Compare(Negative, Zero),
-            new Compare(Positive, Max),
+            new(Zero, Positive),
+            new(Negative, Zero),
+            new(Positive, Max)
         };
-        
+
         LesserValuesThatAreInvalid = new List<Compare>
         {
-            new Compare(Positive, Zero),
-            new Compare(Positive, Positive),
-            new Compare(Zero, Negative),
-            new Compare(Zero, Zero),
-            new Compare(Max, Positive),
-            new Compare(Max, Max),
+            new(Positive, Zero),
+            new(Positive, Positive),
+            new(Zero, Negative),
+            new(Zero, Zero),
+            new(Max, Positive),
+            new(Max, Max)
         };
 
         LesserEqualsValuesThatAreValid = new List<Compare>
         {
-            new Compare(Zero, Positive),
-            new Compare(Zero, Zero),
-            new Compare(Negative, Zero),
-            new Compare(Negative, Negative),
-            new Compare(Positive, Max),
-            new Compare(Positive, Positive),
-            new Compare(Min, Min),
-            new Compare(Max, Max),
+            new(Zero, Positive),
+            new(Zero, Zero),
+            new(Negative, Zero),
+            new(Negative, Negative),
+            new(Positive, Max),
+            new(Positive, Positive),
+            new(Min, Min),
+            new(Max, Max)
         };
-        
+
         LesserEqualsValuesThatAreInvalid = new List<Compare>
         {
-            new Compare(Positive, Zero),
-            new Compare(Zero, Negative),
-            new Compare(Max, Positive),
+            new(Positive, Zero),
+            new(Zero, Negative),
+            new(Max, Positive)
         };
 
         GreaterValuesThatAreValid = new List<Compare>
         {
-            new Compare(Positive, Zero),
-            new Compare(Zero, Negative),
-            new Compare(Max, Positive),
+            new(Positive, Zero),
+            new(Zero, Negative),
+            new(Max, Positive)
         };
 
         GreaterValuesThatAreInvalid = new List<Compare>
         {
-            new Compare(Zero, Positive),
-            new Compare(Zero, Zero),
-            new Compare(Negative, Zero),
-            new Compare(Negative, Negative),
-            new Compare(Positive, Max),
-            new Compare(Positive, Positive),
-            new Compare(Max, Max),
-            new Compare(Min, Min),
+            new(Zero, Positive),
+            new(Zero, Zero),
+            new(Negative, Zero),
+            new(Negative, Negative),
+            new(Positive, Max),
+            new(Positive, Positive),
+            new(Max, Max),
+            new(Min, Min)
         };
 
         GreaterEqualsValuesThatAreValid = new List<Compare>
         {
-            new Compare(Positive, Zero),
-            new Compare(Positive, Positive),
-            new Compare(Zero, Negative),
-            new Compare(Zero, Zero),
-            new Compare(Max, Positive),
-            new Compare(Max, Max),
+            new(Positive, Zero),
+            new(Positive, Positive),
+            new(Zero, Negative),
+            new(Zero, Zero),
+            new(Max, Positive),
+            new(Max, Max)
         };
 
         GreaterEqualsValuesThatAreInvalid = new List<Compare>
         {
-            new Compare(Zero, Positive),
-            new Compare(Negative, Zero),
-            new Compare(Positive, Max),
-            new Compare(Min, Negative),
+            new(Zero, Positive),
+            new(Negative, Zero),
+            new(Positive, Max),
+            new(Min, Negative)
         };
     }
+
+    protected abstract T Zero { get; }
+    protected abstract T Positive { get; }
+    protected abstract T Negative { get; }
+    protected abstract T Max { get; }
+    protected abstract T Min { get; }
+
+    protected IEnumerable<T> PositiveValues { get; }
+    protected IEnumerable<T> NegativeValues { get; }
+    protected IEnumerable<Range> RangesThatAreValid { get; }
+    protected IEnumerable<Range> RangesThatAreInvalid { get; }
+    protected IEnumerable<Compare> LesserValuesThatAreValid { get; }
+    protected IEnumerable<Compare> LesserValuesThatAreInvalid { get; }
+    protected IEnumerable<Compare> LesserEqualsValuesThatAreValid { get; }
+    protected IEnumerable<Compare> LesserEqualsValuesThatAreInvalid { get; }
+    protected IEnumerable<Compare> GreaterValuesThatAreValid { get; }
+    protected IEnumerable<Compare> GreaterValuesThatAreInvalid { get; }
+    protected IEnumerable<Compare> GreaterEqualsValuesThatAreValid { get; }
+    protected IEnumerable<Compare> GreaterEqualsValuesThatAreInvalid { get; }
 
     [Fact]
     public void Positive_Requirement_Successful_Asserts_Positive_Values()
@@ -241,7 +243,8 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         foreach (var greaterEquals in GreaterEqualsValuesThatAreValid)
         {
-            var exception = Record.Exception(() => Contract.For(greaterEquals.Value).GreaterEquals(greaterEquals.Max).Ok());
+            var exception =
+                Record.Exception(() => Contract.For(greaterEquals.Value).GreaterEquals(greaterEquals.Max).Ok());
             exception.Should().BeNull();
         }
     }
@@ -251,7 +254,8 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         foreach (var greaterEquals in GreaterEqualsValuesThatAreInvalid)
         {
-            var exception = Record.Exception(() => Contract.For(greaterEquals.Value).GreaterEquals(greaterEquals.Max).Ok());
+            var exception =
+                Record.Exception(() => Contract.For(greaterEquals.Value).GreaterEquals(greaterEquals.Max).Ok());
             exception.Should().NotBeNull();
         }
     }
@@ -261,7 +265,8 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         foreach (var lesserEquals in LesserEqualsValuesThatAreValid)
         {
-            var exception = Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
+            var exception =
+                Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
             exception.Should().BeNull();
         }
     }
@@ -271,7 +276,8 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         foreach (var lesserEquals in LesserEqualsValuesThatAreInvalid)
         {
-            var exception = Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
+            var exception =
+                Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
             exception.Should().NotBeNull();
         }
     }
@@ -280,7 +286,7 @@ public abstract class ComparableTests<T> where T : IComparable
     public void Multiple_Requirements_When_Valid_Does_Not_Throw()
     {
         var target = Positive;
-        
+
         var exception = Record.Exception(() =>
             Contract
                 .For(target)
@@ -299,16 +305,14 @@ public abstract class ComparableTests<T> where T : IComparable
     public void Multiple_Requirements_When_Not_All_Are_Valid_Does_Throw()
     {
         var target = Positive;
-    
+
         var exception = Record.Exception(() =>
             Contract
                 .For(target)
                 .Lesser(Max)
                 .Greater(Min)
                 .InRange(Min, Max)
-                
                 .Negative()
-                
                 .GreaterEquals(Positive)
                 .LesserEquals(Positive)
                 .Positive()

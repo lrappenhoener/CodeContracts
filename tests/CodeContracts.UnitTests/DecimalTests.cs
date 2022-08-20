@@ -1,10 +1,10 @@
 ﻿namespace CodeContracts.UnitTests;
 
-public class DecimalTests : ComparableTests<Decimal>
+public class DecimalTests : ComparableTests<decimal>
 {
-    protected override Decimal Zero => 0m;
-    protected override Decimal Positive => 1m;
-    protected override Decimal Negative => -1m;
-    protected override Decimal Max => Decimal.MaxValue;
-    protected override Decimal Min => Decimal.MinValue;
+    protected override decimal Zero => 0m;
+    protected override decimal Positive => 1m;
+    protected override decimal Negative => -1m;
+    protected override decimal Max => decimal.MaxValue;
+    protected override decimal Min => decimal.MinValue;
 }
