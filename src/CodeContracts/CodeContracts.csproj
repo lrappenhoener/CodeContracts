@@ -8,8 +8,13 @@
 		<Version>0.0.1</Version>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="$(Configuration) == 'Debug'">
+		<OutputPath>..\..\..\build\debug</OutputPath>
+	</PropertyGroup>
+
 	<PropertyGroup Condition="$(Configuration) == 'Release'">
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<OutputPath>..\..\..\build\release</OutputPath>
 		<PackageOutputPath>g:\Packages\Private\</PackageOutputPath>
 	</PropertyGroup>
 </Project>
