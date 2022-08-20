@@ -21,6 +21,18 @@ public class ContractEnumerableConditions
         return this;
     }
 
+    public ContractEnumerableConditions NotNullOrEmpty()
+    {
+        UpdateConditions(o => o != null && CollectionNotEmpty(o));
+        return this;
+    }
+
+    private bool CollectionNotEmpty(IEnumerable enumerable)
+    {
+        var enumerator = enumerable.GetEnumerator();
+        return enumerator.MoveNext();
+    }
+
     private void UpdateConditions(Expression<Func<IEnumerable?, bool>> condition)
     {
         _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
