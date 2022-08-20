@@ -29,5 +29,16 @@ namespace CodeContracts.UnitTests
 
             exception.Should().BeNull();
         }
+
+        [Fact]
+        public void NotEmpty_Requirement_When_Null_Throws()
+        {
+            IEnumerable enumerable = null;
+
+            var exception = Record.Exception(() => Contract.For(enumerable).NotNullOrEmpty().Ok());
+
+            exception.Should().NotBeNull();
+        }
+
     }
 }
