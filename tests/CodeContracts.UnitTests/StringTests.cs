@@ -63,5 +63,19 @@ namespace CodeContracts.UnitTests
             exception.Should().BeNull();
         }
 
+        [Fact]
+        public void Multiple_Requirements_When_Not_All_Valid_Does_Throw()
+        {
+            var target = " ";
+            var exception = Record.Exception(() => 
+                Contract.For(target)
+                    .NotNull()
+                    .NotNullOrEmpty()
+                    .NotNullOrEmptyOrWhitespace()
+                    .Ok());
+
+            exception.Should().NotBeNull();
+        }
+        
     }
 }
