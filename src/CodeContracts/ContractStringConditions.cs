@@ -26,6 +26,12 @@ public class ContractStringConditions
         return this;
     }
 
+    public ContractStringConditions NotNullEmptyWhitespace()
+    {
+        UpdateConditions(o => !string.IsNullOrWhiteSpace(o));
+        return this;
+    }
+
     private void UpdateConditions(Expression<Func<string?, bool>> condition)
     {
         _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
@@ -44,4 +50,6 @@ public class ContractStringConditions
         var compiled = _condition.Compile();
         Debug.Assert(compiled.Invoke(_target));
     }
+
+    
 }
