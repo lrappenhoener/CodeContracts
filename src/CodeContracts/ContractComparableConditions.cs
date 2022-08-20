@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq.Expressions;
 
 namespace PCC.Libraries.CodeContracts;
 
-public class ContractComparableConditions<T> where T : IComparable
+public sealed class ContractComparableConditions<T> : BaseConditions<T> where T : IComparable
 {
     private readonly T _default;
-    private readonly T _target;
-    private Expression<Func<T, bool>>? _condition;
 
     public ContractComparableConditions(T target)
     {
-        _target = target;
-        _default = (T)Activator.CreateInstance(_target.GetType());
+        Target = target;
+        _default = (T)Activator.CreateInstance(Target.GetType());
     }
+
+    protected override T Target { get; }
 
     public ContractComparableConditions<T> Positive()
     {
@@ -56,25 +54,5 @@ public class ContractComparableConditions<T> where T : IComparable
     {
         UpdateConditions(i => i.CompareTo(other) >= 0);
         return this;
-    }
-
-    public void Ok()
-    {
-        if (_condition == null) return;
-        var compiled = _condition.Compile();
-        Debug.Assert(compiled.Invoke(_target));
-    }
-
-    private void UpdateConditions(Expression<Func<T, bool>> condition)
-    {
-        _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
-    }
-
-    private Expression<Func<T, bool>> CreateAndExpression(Expression<Func<T, bool>> first,
-        Expression<Func<T, bool>> second)
-    {
-        var firstCondition = first.Compile();
-        var secondCondition = second.Compile();
-        return o => firstCondition(o) && secondCondition(o);
     }
 }
