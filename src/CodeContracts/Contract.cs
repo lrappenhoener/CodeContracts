@@ -5,9 +5,9 @@ namespace CodeContracts;
 
 public static class Contract
 {
-    public static ContractConditions For(object? target)
+    public static ContractObjectConditions For(object? target)
     {
-        return new ContractConditions(target);
+        return new ContractObjectConditions(target);
     }
 
     public static ContractComparableConditions<IComparable> For(IComparable target)

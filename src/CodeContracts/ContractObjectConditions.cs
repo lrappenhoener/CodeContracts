@@ -4,17 +4,17 @@ using System.Linq.Expressions;
 
 namespace CodeContracts;
 
-public class ContractConditions
+public class ContractObjectConditions
 {
     private readonly object? _target;
     private Expression<Func<object?, bool>>? _condition;
 
-    public ContractConditions(object? target)
+    public ContractObjectConditions(object? target)
     {
         _target = target;
     }
 
-    public ContractConditions NotNull()
+    public ContractObjectConditions NotNull()
     {
         UpdateConditions(o => o != null);
         return this;
