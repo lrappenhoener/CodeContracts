@@ -40,6 +40,12 @@ public class ContractComparableConditions<T> where T : IComparable
         return this;
     }
 
+    public ContractComparableConditions<T> LesserEquals(IComparable other)
+    {
+        UpdateConditions((i) => i.CompareTo(other) <= 0);
+        return this;
+    }
+
     public ContractComparableConditions<T> Greater(IComparable other)
     {
         UpdateConditions((i) => i.CompareTo(other) > 0);
@@ -71,6 +77,4 @@ public class ContractComparableConditions<T> where T : IComparable
         var secondCondition = second.Compile();
         return o => firstCondition(o) && secondCondition(o);
     }
-
-    
 }
