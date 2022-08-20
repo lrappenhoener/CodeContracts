@@ -315,4 +315,15 @@ public abstract class ComparableTests<T> where T : IComparable
 
         exception.Should().NotBeNull();
     }
+
+    [Fact]
+    public void Ok_With_No_Requirements_Not_Throws()
+    {
+        var target = Positive;
+
+        var exception = Record.Exception(() =>
+            Contract.For(target).Ok());
+
+        exception.Should().BeNull();
+    }
 }
