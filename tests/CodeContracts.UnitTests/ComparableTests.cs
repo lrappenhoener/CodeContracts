@@ -17,6 +17,7 @@ public abstract class ComparableTests<T> where T : IComparable
     protected IEnumerable<Compare> LesserValuesThatAreValid { get; } 
     protected IEnumerable<Compare> LesserValuesThatAreInvalid { get; } 
     protected IEnumerable<Compare> LesserEqualsValuesThatAreValid { get; } 
+    protected IEnumerable<Compare> LesserEqualsValuesThatAreInvalid { get; } 
     protected IEnumerable<Compare> GreaterValuesThatAreValid { get; } 
     protected IEnumerable<Compare> GreaterValuesThatAreInvalid { get; } 
     protected IEnumerable<Compare> GreaterEqualsValuesThatAreValid { get; } 
@@ -79,6 +80,13 @@ public abstract class ComparableTests<T> where T : IComparable
             new Compare(Positive, Positive),
             new Compare(Min, Min),
             new Compare(Max, Max),
+        };
+        
+        LesserEqualsValuesThatAreInvalid = new List<Compare>
+        {
+            new Compare(Positive, Zero),
+            new Compare(Zero, Negative),
+            new Compare(Max, Positive),
         };
 
         GreaterValuesThatAreValid = new List<Compare>
@@ -254,6 +262,16 @@ public abstract class ComparableTests<T> where T : IComparable
         {
             var exception = Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
             exception.Should().BeNull();
+        }
+    }
+
+    [Fact]
+    public void LesserEquals_Requirement_Successful_Asserts_InvalidValues()
+    {
+        foreach (var lesserEquals in LesserEqualsValuesThatAreInvalid)
+        {
+            var exception = Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
+            exception.Should().NotBeNull();
         }
     }
 }
