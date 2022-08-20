@@ -294,4 +294,25 @@ public abstract class ComparableTests<T> where T : IComparable
         exception.Should().BeNull();
     }
 
+    [Fact]
+    public void Multiple_Requirements_When_Not_All_Are_Valid_Does_Throw()
+    {
+        var target = Positive;
+    
+        var exception = Record.Exception(() =>
+            Contract
+                .For(target)
+                .Lesser(Max)
+                .Greater(Min)
+                .InRange(Min, Max)
+                
+                .Negative()
+                
+                .GreaterEquals(Positive)
+                .LesserEquals(Positive)
+                .Positive()
+                .Ok());
+
+        exception.Should().NotBeNull();
+    }
 }
