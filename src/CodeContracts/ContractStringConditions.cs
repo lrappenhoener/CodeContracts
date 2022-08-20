@@ -20,6 +20,12 @@ public class ContractStringConditions
         return this;
     }
 
+    public ContractStringConditions NotNullOrEmpty()
+    {
+        UpdateConditions(o => !string.IsNullOrEmpty(o));
+        return this;
+    }
+
     private void UpdateConditions(Expression<Func<string?, bool>> condition)
     {
         _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
