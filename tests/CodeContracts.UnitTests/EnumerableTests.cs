@@ -31,7 +31,7 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
-        public void NotEmpty_Requirement_When_Null_Throws()
+        public void NotNullOrEmpty_Requirement_When_Null_Throws()
         {
             IEnumerable enumerable = null;
 
@@ -41,7 +41,7 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
-        public void NotEmpty_Requirement_When_Empty_Throws()
+        public void NotNullOrEmpty_Requirement_When_Empty_Throws()
         {
             IEnumerable enumerable = new ArrayList();
 
@@ -51,7 +51,7 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
-        public void NotEmpty_Requirement_When_Not_Empty_Does_Not_Throw()
+        public void NotNullOrEmpty_Requirement_When_Not_Empty_Does_Not_Throw()
         {
             IEnumerable enumerable = new ArrayList { "foo" };
 
