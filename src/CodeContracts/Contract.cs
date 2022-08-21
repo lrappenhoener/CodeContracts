@@ -54,5 +54,11 @@ namespace CodeContracts
         {
             RequiresAll(collection, predicate, message);
         }
+
+        [Conditional("DEBUG")]
+        public static void EnsuresAll<T>(IEnumerable<T> collection, ContractRequirements<T> requirements, string message = "")
+        {
+            RequiresAll(collection, requirements, message);
+        }
     }
 }
