@@ -34,7 +34,7 @@ namespace CodeContracts.UnitTests
         [Fact]
         public void RequiresAll_Lambda_Successful_Validates_Valid_Collection()
         {
-            var collection = CreateTrueBoolCollection();
+            var collection = CreateValidBoolCollection();
             bool Predicate(bool d) => d;
 
             var resultIsValid = Record.Exception(() => Contract.RequiresAll(collection, Predicate)) == null;
@@ -55,12 +55,12 @@ namespace CodeContracts.UnitTests
 
         private List<bool> CreateInvalidBoolCollection()
         {
-            var collection = CreateTrueBoolCollection();
+            var collection = CreateValidBoolCollection();
             collection.Add(false);
             return collection;
         }
 
-        private static List<bool> CreateTrueBoolCollection()
+        private static List<bool> CreateValidBoolCollection()
         {
             return Enumerable.Range(1, 20).Select(i => true).ToList();
         }
