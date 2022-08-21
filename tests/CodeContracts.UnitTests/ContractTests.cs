@@ -20,6 +20,16 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
+        public void Requires_Lambda_Successful_Validates_Valid_Requirements()
+        {
+            Func<bool> predicate = () => true;
+    
+            var exception = Record.Exception(() => Contract.Requires(predicate));
+
+            exception.Should().BeNull();
+        }
+
+        [Fact]
         public void Requires_Successful_Validates_Invalid_Requirements()
         {
             var requirements = CreateInvalidRequirements();
