@@ -32,6 +32,22 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
+        public void RequiresAll_Lambda_Successful_Validates()
+        {
+            var collection = CreateTrueBoolCollection();
+            bool Predicate(bool d) => d;
+
+            var resultIsValid = Record.Exception(() => Contract.RequiresAll(collection, Predicate)) == null;
+
+            resultIsValid.Should().BeTrue();
+        }
+
+        private static List<bool> CreateTrueBoolCollection()
+        {
+            return Enumerable.Range(1, 20).Select(i => true).ToList();
+        }
+
+        [Fact]
         public void Requires_Successful_Validates_Invalid_Requirements()
         {
             var (target, requirements) = CreateInvalidRequirements();
