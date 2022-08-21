@@ -32,6 +32,16 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
+        public void Ensures_Successful_Validates_Valid_Requirements()
+        {
+            var (target, requirements) = CreateValidRequirements();
+    
+            var exception = Record.Exception(() => Contract.Ensures(target, requirements));
+
+            exception.Should().BeNull();
+        }
+
+        [Fact]
         public void RequiresAll_Lambda_Successful_Validates_Valid_Collection()
         {
             var collection = CreateValidBoolCollection();
