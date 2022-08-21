@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace CodeContracts;
 
-public abstract class BaseRequirements<T>
+public abstract class FinalRequirements<T>
 {
     private Expression<Func<T, bool>>? _condition;
 
@@ -23,10 +23,10 @@ public abstract class BaseRequirements<T>
         return o => firstCondition(o) && secondCondition(o);
     }
 
-    public void Ok()
+    public bool Ok()
     {
-        if (_condition == null) return;
+        if (_condition == null) return true;
         var compiled = _condition.Compile();
-        Debug.Assert(compiled.Invoke(Target));
+        return compiled.Invoke(Target);
     }
 }

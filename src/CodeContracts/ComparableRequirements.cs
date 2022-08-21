@@ -2,7 +2,7 @@
 
 namespace CodeContracts;
 
-public sealed class ComparableRequirements<T> : BaseRequirements<T> where T : IComparable
+public sealed class ComparableRequirements<T> : FinalRequirements<T> where T : IComparable
 {
     private readonly T _default;
 

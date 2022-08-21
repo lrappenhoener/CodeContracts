@@ -5,53 +5,53 @@ namespace CodeContracts;
 
 public static class Requirements
 {
-    public static ContractComparableRequirements<short> For(short target)
+    public static ComparableRequirements<short> For(short target)
     {
-        return new ContractComparableRequirements<short>(target);
+        return new ComparableRequirements<short>(target);
     }
 
-    public static ContractComparableRequirements<int> For(int target)
+    public static ComparableRequirements<int> For(int target)
     {
-        return new ContractComparableRequirements<int>(target);
+        return new ComparableRequirements<int>(target);
     }
 
-    public static ContractComparableRequirements<long> For(long target)
+    public static ComparableRequirements<long> For(long target)
     {
-        return new ContractComparableRequirements<long>(target);
+        return new ComparableRequirements<long>(target);
     }
 
-    public static ContractComparableRequirements<float> For(float target)
+    public static ComparableRequirements<float> For(float target)
     {
-        return new ContractComparableRequirements<float>(target);
+        return new ComparableRequirements<float>(target);
     }
 
-    public static ContractComparableRequirements<double> For(double target)
+    public static ComparableRequirements<double> For(double target)
     {
-        return new ContractComparableRequirements<double>(target);
+        return new ComparableRequirements<double>(target);
     }
 
-    public static ContractComparableRequirements<decimal> For(decimal target)
+    public static ComparableRequirements<decimal> For(decimal target)
     {
-        return new ContractComparableRequirements<decimal>(target);
+        return new ComparableRequirements<decimal>(target);
     }
 
-    public static ContractComparableRequirements<IComparable> For(IComparable target)
+    public static ComparableRequirements<IComparable> For(IComparable target)
     {
-        return new ContractComparableRequirements<IComparable>(target);
+        return new ComparableRequirements<IComparable>(target);
     }
 
-    public static ContractStringRequirements For(string? target)
+    public static StringRequirements For(string? target)
     {
-        return new ContractStringRequirements(target);
+        return new StringRequirements(target);
     }
 
-    public static ContractEnumerableRequirements For(IEnumerable? target)
+    public static EnumerableRequirements For(IEnumerable? target)
     {
-        return new ContractEnumerableRequirements(target);
+        return new EnumerableRequirements(target);
     }
 
-    public static ContractObjectRequirements For(object? target)
+    public static ObjectRequirements For(object? target)
     {
-        return new ContractObjectRequirements(target);
+        return new ObjectRequirements(target);
     }
 }

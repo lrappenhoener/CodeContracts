@@ -1,6 +1,6 @@
 ﻿namespace CodeContracts;
 
-public sealed class ObjectRequirements : BaseRequirements<object?>
+public sealed class ObjectRequirements : FinalRequirements<object?>
 {
     internal ObjectRequirements(object? target)
     {
