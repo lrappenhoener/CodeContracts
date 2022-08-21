@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace CodeContracts;
 
-public abstract class FinalRequirements<T>
+public abstract class ContractRequirements<T>
 {
     private Expression<Func<T, bool>>? _condition;
 

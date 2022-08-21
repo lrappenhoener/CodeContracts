@@ -2,7 +2,7 @@
 
 namespace CodeContracts;
 
-public sealed class EnumerableRequirements : FinalRequirements<IEnumerable?>
+public sealed class EnumerableRequirements : ContractRequirements<IEnumerable?>
 {
     internal EnumerableRequirements(IEnumerable? target)
     {

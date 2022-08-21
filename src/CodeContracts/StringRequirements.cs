@@ -1,6 +1,6 @@
 ﻿namespace CodeContracts;
 
-public sealed class StringRequirements : FinalRequirements<string?>
+public sealed class StringRequirements : ContractRequirements<string?>
 {
     internal StringRequirements(string? target)
     {
