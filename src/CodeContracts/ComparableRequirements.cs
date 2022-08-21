@@ -6,13 +6,10 @@ public sealed class ComparableRequirements<T> : ContractRequirements<T> where T 
 {
     private readonly T _default;
 
-    internal ComparableRequirements(T target)
+    internal ComparableRequirements(T defaultValue)
     {
-        Target = target;
-        _default = (T)Activator.CreateInstance(Target.GetType());
+        _default = defaultValue;
     }
-
-    protected override T Target { get; }
 
     public ComparableRequirements<T> Positive()
     {

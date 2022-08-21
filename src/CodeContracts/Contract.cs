@@ -6,9 +6,9 @@ namespace CodeContracts
     public static class Contract
     {
         [Conditional("DEBUG")]
-        public static void Requires<T>(ContractRequirements<T> requirements, string message = "")
+        public static void Requires<T>(T target, ContractRequirements<T> requirements, string message = "")
         {
-            if (requirements.Ok()) return;
+            if (requirements.Ok(target)) return;
             Debug.WriteLine(false, message);
             throw new CodeContractException(message);
         }

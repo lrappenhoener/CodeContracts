@@ -8,8 +8,6 @@ public abstract class ContractRequirements<T>
 {
     private Expression<Func<T, bool>>? _condition;
 
-    protected abstract T Target { get; }
-
     protected void UpdateConditions(Expression<Func<T, bool>> condition)
     {
         _condition = _condition == null ? condition : CreateAndExpression(_condition, condition);
@@ -23,10 +21,10 @@ public abstract class ContractRequirements<T>
         return o => firstCondition(o) && secondCondition(o);
     }
 
-    public bool Ok()
+    public bool Ok(T target)
     {
         if (_condition == null) return true;
         var compiled = _condition.Compile();
-        return compiled.Invoke(Target);
+        return compiled.Invoke(target);
     }
 }

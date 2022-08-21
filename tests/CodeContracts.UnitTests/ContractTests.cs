@@ -12,9 +12,9 @@ namespace CodeContracts.UnitTests
         [Fact]
         public void Requires_Successful_Validates_Valid_Requirements()
         {
-            var requirements = CreateValidRequirements();
+            var (target, requirements) = CreateValidRequirements();
             
-            var exception = Record.Exception(() => Contract.Requires(requirements));
+            var exception = Record.Exception(() => Contract.Requires(target, requirements));
 
             exception.Should().BeNull();
         }
@@ -34,33 +34,33 @@ namespace CodeContracts.UnitTests
         [Fact]
         public void Requires_Successful_Validates_Invalid_Requirements()
         {
-            var requirements = CreateInvalidRequirements();
+            var (target, requirements) = CreateInvalidRequirements();
     
-            var exception = Record.Exception(() => Contract.Requires(requirements));
+            var exception = Record.Exception(() => Contract.Requires(target, requirements));
 
             exception.Should().NotBeNull();
         }
 
-        private ContractRequirements<double> CreateInvalidRequirements()
+        private (double, ComparableRequirements<double>) CreateInvalidRequirements()
         {
-            var requirements = CreateValidRequirements()
-                .Negative();
+            var (target, requirements) = CreateValidRequirements();
+            requirements.Negative();
 
-            return requirements;
+            return (target, requirements);
         }
 
-        private ComparableRequirements<double> CreateValidRequirements()
+        private (double, ComparableRequirements<double>) CreateValidRequirements()
         {
             var target = 50.0d;
 
-            return Requirements
+            return (target, Requirements
                 .For(target)
                 .Lesser(100.0d)
                 .Greater(25.0d)
                 .InRange(45.0d, 55.0d)
                 .GreaterEquals(target)
                 .LesserEquals(target)
-                .Positive();
+                .Positive());
         }
     }
 }

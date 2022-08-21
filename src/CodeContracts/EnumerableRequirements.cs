@@ -4,13 +4,6 @@ namespace CodeContracts;
 
 public sealed class EnumerableRequirements : ContractRequirements<IEnumerable?>
 {
-    internal EnumerableRequirements(IEnumerable? target)
-    {
-        Target = target;
-    }
-
-    protected override IEnumerable? Target { get; }
-
     public EnumerableRequirements NotNull()
     {
         UpdateConditions(o => o != null);

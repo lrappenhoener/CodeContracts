@@ -132,80 +132,80 @@ public abstract class ComparableTests<T> where T : IComparable
     [Fact]
     public void Positive_Requirement_Successful_Validates_Positive_Values()
     {
-        PositiveValues.All(v => Requirements.For(v).Positive().Ok()).Should().BeTrue();
+        PositiveValues.All(v => Requirements.For(v).Positive().Ok(v)).Should().BeTrue();
     }
 
     [Fact]
     public void Positive_Requirement_Successful_Validates_Negative_Values()
     {
-        NegativeValues.All(v => !Requirements.For(v).Positive().Ok()).Should().BeTrue();
+        NegativeValues.All(v => !Requirements.For(v).Positive().Ok(v)).Should().BeTrue();
     }
 
     [Fact]
     public void Negative_Requirement_Successful_Validates_Negative_Values()
     {
-        NegativeValues.All(v => Requirements.For(v).Negative().Ok()).Should().BeTrue();
+        NegativeValues.All(v => Requirements.For(v).Negative().Ok(v)).Should().BeTrue();
     }
 
     [Fact]
     public void Negative_Requirement_Successful_Validates_Positive_Values()
     {
-        PositiveValues.All(v => !Requirements.For(v).Negative().Ok()).Should().BeTrue();
+        PositiveValues.All(v => !Requirements.For(v).Negative().Ok(v)).Should().BeTrue();
     }
 
     [Fact]
     public void InRange_Requirement_Successful_Validates_Valid_Ranges()
     {
-        RangesThatAreValid.All(r => Requirements.For(r.Value).InRange(r.Min, r.Max).Ok()).Should().BeTrue();
+        RangesThatAreValid.All(r => Requirements.For(r.Value).InRange(r.Min, r.Max).Ok(r.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void InRange_Requirement_Successful_Validates_Invalid_Ranges()
     {
-        RangesThatAreInvalid.All(r => !Requirements.For(r.Value).InRange(r.Min, r.Max).Ok()).Should().BeTrue();
+        RangesThatAreInvalid.All(r => !Requirements.For(r.Value).InRange(r.Min, r.Max).Ok(r.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void Lesser_Requirement_Successful_Validates_Valid_Values()
     {
-        LesserValuesThatAreValid.All(v => Requirements.For(v.Value).Lesser(v.Max).Ok()).Should().BeTrue();
+        LesserValuesThatAreValid.All(v => Requirements.For(v.Value).Lesser(v.Max).Ok(v.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void Lesser_Requirement_Successful_Validates_Invalid_Values()
     {
-        LesserValuesThatAreInvalid.All(v => !Requirements.For(v.Value).Lesser(v.Max).Ok()).Should().BeTrue();
+        LesserValuesThatAreInvalid.All(v => !Requirements.For(v.Value).Lesser(v.Max).Ok(v.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void Greater_Requirement_Successful_Validates_Valid_Values()
     {
-        GreaterValuesThatAreValid.All(greater => Requirements.For(greater.Value).Greater(greater.Max).Ok()).Should().BeTrue();
+        GreaterValuesThatAreValid.All(greater => Requirements.For(greater.Value).Greater(greater.Max).Ok(greater.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void Greater_Requirement_Successful_Validates_Invalid_Values()
     {
-        GreaterValuesThatAreInvalid.All(greater => !Requirements.For(greater.Value).Greater(greater.Max).Ok()).Should().BeTrue();
+        GreaterValuesThatAreInvalid.All(greater => !Requirements.For(greater.Value).Greater(greater.Max).Ok(greater.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void GreaterEquals_Requirement_Successful_Validates_Valid_Values()
     {
-        GreaterEqualsValuesThatAreValid.All(greater => Requirements.For(greater.Value).GreaterEquals(greater.Max).Ok()).Should().BeTrue();
+        GreaterEqualsValuesThatAreValid.All(greater => Requirements.For(greater.Value).GreaterEquals(greater.Max).Ok(greater.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void GreaterEquals_Requirement_Successful_Validates_Invalid_Values()
     {
-        GreaterEqualsValuesThatAreInvalid.All(greater => !Requirements.For(greater.Value).GreaterEquals(greater.Max).Ok()).Should().BeTrue();
+        GreaterEqualsValuesThatAreInvalid.All(greater => !Requirements.For(greater.Value).GreaterEquals(greater.Max).Ok(greater.Value)).Should().BeTrue();
     }
 
     [Fact]
     public void LesserEquals_Requirement_Successful_Validates_Valid_Values()
     {
         LesserEqualsValuesThatAreValid
-            .All(lesserEquals => Requirements.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok()).Should()
+            .All(lesserEquals => Requirements.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok(lesserEquals.Value)).Should()
             .BeTrue();
     }
 
@@ -213,7 +213,7 @@ public abstract class ComparableTests<T> where T : IComparable
     public void LesserEquals_Requirement_Successful_Validates_InvalidValues()
     {
         LesserEqualsValuesThatAreInvalid
-            .All(lesserEquals => !Requirements.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok()).Should()
+            .All(lesserEquals => !Requirements.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok(lesserEquals.Value)).Should()
             .BeTrue();
     }
 
@@ -230,7 +230,7 @@ public abstract class ComparableTests<T> where T : IComparable
                 .GreaterEquals(Positive)
                 .LesserEquals(Positive)
                 .Positive()
-                .Ok();
+                .Ok(target);
 
         valid.Should().BeTrue();
     }
@@ -249,7 +249,7 @@ public abstract class ComparableTests<T> where T : IComparable
                 .GreaterEquals(Positive)
                 .LesserEquals(Positive)
                 .Positive()
-                .Ok();
+                .Ok(target);
 
         valid.Should().BeFalse();
     }
@@ -259,7 +259,7 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         var target = Positive;
 
-        var valid = Requirements.For(target).Ok();
+        var valid = Requirements.For(target).Ok(target);
 
         valid.Should().BeTrue();
     }

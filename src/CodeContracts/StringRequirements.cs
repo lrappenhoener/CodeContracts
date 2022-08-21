@@ -2,13 +2,6 @@
 
 public sealed class StringRequirements : ContractRequirements<string?>
 {
-    internal StringRequirements(string? target)
-    {
-        Target = target;
-    }
-
-    protected override string? Target { get; }
-
     public StringRequirements NotNull()
     {
         UpdateConditions(o => o != null);

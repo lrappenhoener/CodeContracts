@@ -10,7 +10,7 @@ public class EnumerableTests
     {
         IEnumerable? enumerable = null;
 
-        Requirements.For(enumerable).NotNull().Ok()
+        Requirements.For(enumerable).NotNull().Ok(enumerable)
             .Should().BeFalse();
     }
 
@@ -19,7 +19,7 @@ public class EnumerableTests
     {
         IEnumerable enumerable = new ArrayList();
 
-        Requirements.For(enumerable).NotNull().Ok().Should().BeTrue();
+        Requirements.For(enumerable).NotNull().Ok(enumerable).Should().BeTrue();
     }
 
     [Fact]
@@ -27,7 +27,7 @@ public class EnumerableTests
     {
         IEnumerable? enumerable = null;
 
-        Requirements.For(enumerable).NotNullOrEmpty().Ok().Should().BeFalse();
+        Requirements.For(enumerable).NotNullOrEmpty().Ok(enumerable).Should().BeFalse();
     }
 
     [Fact]
@@ -35,7 +35,7 @@ public class EnumerableTests
     {
         IEnumerable enumerable = new ArrayList();
 
-        Requirements.For(enumerable).NotNullOrEmpty().Ok().Should().BeFalse();
+        Requirements.For(enumerable).NotNullOrEmpty().Ok(enumerable).Should().BeFalse();
     }
 
     [Fact]
@@ -43,7 +43,7 @@ public class EnumerableTests
     {
         IEnumerable enumerable = new ArrayList { "foo" };
 
-        Requirements.For(enumerable).NotNullOrEmpty().Ok().Should().BeTrue();
+        Requirements.For(enumerable).NotNullOrEmpty().Ok(enumerable).Should().BeTrue();
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class EnumerableTests
         var valid = Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
-                .Ok();
+                .Ok(target);
 
         valid.Should().BeTrue();
     }
@@ -68,7 +68,7 @@ public class EnumerableTests
         var valid = Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
-                .Ok();
+                .Ok(target);
 
         valid.Should().BeFalse();
     }
@@ -78,7 +78,7 @@ public class EnumerableTests
     {
         IEnumerable? target = null;
 
-        var valid = Requirements.For(target).Ok();
+        var valid = Requirements.For(target).Ok(target);
 
         valid.Should().BeTrue();
     }

@@ -9,7 +9,7 @@ public class NullableTests
     {
         object? target = null;
 
-        var valid = Requirements.For(target).NotNull().Ok();
+        var valid = Requirements.For(target).NotNull().Ok(target);
 
         valid.Should().BeFalse();
     }
@@ -19,7 +19,7 @@ public class NullableTests
     {
         var target = new object();
 
-        var valid = Requirements.For(target).NotNull().Ok();
+        var valid = Requirements.For(target).NotNull().Ok(target);
 
         valid.Should().BeTrue();
     }
@@ -29,7 +29,7 @@ public class NullableTests
     {
         object? target = null;
 
-        var valid = Requirements.For(target).Ok();
+        var valid = Requirements.For(target).Ok(target);
 
         valid.Should().BeTrue();
     }
