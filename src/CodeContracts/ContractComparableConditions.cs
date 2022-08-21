@@ -6,7 +6,7 @@ public sealed class ContractComparableConditions<T> : BaseConditions<T> where T 
 {
     private readonly T _default;
 
-    public ContractComparableConditions(T target)
+    internal ContractComparableConditions(T target)
     {
         Target = target;
         _default = (T)Activator.CreateInstance(Target.GetType());
