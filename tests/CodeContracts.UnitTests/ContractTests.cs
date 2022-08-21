@@ -100,6 +100,19 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
+        public void EnsuresAll_Successful_Validates_Valid_Collection()
+        {
+            var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
+
+            var resultIsValid = Record.Exception(() => Contract.EnsuresAll(collection, Requirements
+                .For(collection.First())
+                .Greater(0)
+                .Lesser(21))) == null;
+
+            resultIsValid.Should().BeTrue();
+        }
+
+        [Fact]
         public void RequiresAll_Successful_Validates_Invalid_Collection()
         {
             var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
