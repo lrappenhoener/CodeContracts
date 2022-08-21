@@ -26,31 +26,31 @@ public sealed class ContractComparableConditions<T> : BaseConditions<T> where T 
         return this;
     }
 
-    public ContractComparableConditions<T> InRange(IComparable min, IComparable max)
+    public ContractComparableConditions<T> InRange(T min, T max)
     {
         UpdateConditions(i => i.CompareTo(min) >= 0 && i.CompareTo(max) <= 0);
         return this;
     }
 
-    public ContractComparableConditions<T> Lesser(IComparable max)
+    public ContractComparableConditions<T> Lesser(T max)
     {
         UpdateConditions(i => i.CompareTo(max) < 0);
         return this;
     }
 
-    public ContractComparableConditions<T> LesserEquals(IComparable other)
+    public ContractComparableConditions<T> LesserEquals(T other)
     {
         UpdateConditions(i => i.CompareTo(other) <= 0);
         return this;
     }
 
-    public ContractComparableConditions<T> Greater(IComparable other)
+    public ContractComparableConditions<T> Greater(T other)
     {
         UpdateConditions(i => i.CompareTo(other) > 0);
         return this;
     }
 
-    public ContractComparableConditions<T> GreaterEquals(IComparable other)
+    public ContractComparableConditions<T> GreaterEquals(T other)
     {
         UpdateConditions(i => i.CompareTo(other) >= 0);
         return this;
