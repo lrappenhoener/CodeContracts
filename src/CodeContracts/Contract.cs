@@ -28,6 +28,12 @@ namespace CodeContracts
         }
 
         [Conditional("DEBUG")]
+        public static void Ensures(Func<bool> predicate, string message = "")
+        {
+            Requires(predicate, message);
+        }
+
+        [Conditional("DEBUG")]
         public static void RequiresAll<T>(IEnumerable<T> collection, Func<T,bool> predicate, string message = "")
         {
             if (collection.All(predicate)) return;
