@@ -8,7 +8,7 @@ public class NullableTests
     public void NotNull_Requirement_When_Null_Fails()
     {
         object? target = null;
-        var exception = Record.Exception(() => Contract.For(target).NotNull().Ok());
+        var exception = Record.Exception(() => Requirements.For(target).NotNull().Ok());
 
         exception.Should().NotBeNull();
     }
@@ -17,7 +17,7 @@ public class NullableTests
     public void NotNull_Requirement_When_NotNull_Successful()
     {
         var target = new object();
-        var exception = Record.Exception(() => Contract.For(target).NotNull().Ok());
+        var exception = Record.Exception(() => Requirements.For(target).NotNull().Ok());
 
         exception.Should().BeNull();
     }
@@ -28,7 +28,7 @@ public class NullableTests
         object? target = null;
 
         var exception = Record.Exception(() =>
-            Contract.For(target).Ok());
+            Requirements.For(target).Ok());
 
         exception.Should().BeNull();
     }

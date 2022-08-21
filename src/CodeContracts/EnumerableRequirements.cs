@@ -2,22 +2,22 @@
 
 namespace CodeContracts;
 
-public sealed class ContractEnumerableConditions : BaseConditions<IEnumerable?>
+public sealed class EnumerableRequirements : BaseRequirements<IEnumerable?>
 {
-    internal ContractEnumerableConditions(IEnumerable? target)
+    internal EnumerableRequirements(IEnumerable? target)
     {
         Target = target;
     }
 
     protected override IEnumerable? Target { get; }
 
-    public ContractEnumerableConditions NotNull()
+    public EnumerableRequirements NotNull()
     {
         UpdateConditions(o => o != null);
         return this;
     }
 
-    public ContractEnumerableConditions NotNullOrEmpty()
+    public EnumerableRequirements NotNullOrEmpty()
     {
         UpdateConditions(o => o != null && CollectionNotEmpty(o));
         return this;

@@ -11,7 +11,7 @@ public class StringTests
     [InlineData("  ", false)]
     public void NotNull_Requirement_Successful_Asserts(string value, bool throws)
     {
-        var exception = Record.Exception(() => Contract.For(value).NotNull().Ok());
+        var exception = Record.Exception(() => Requirements.For(value).NotNull().Ok());
 
         var hasThrown = exception != null;
         hasThrown.Should().Be(throws);
@@ -24,7 +24,7 @@ public class StringTests
     [InlineData("  ", false)]
     public void NotNullOrEmpty_Requirement_Successful_Asserts(string value, bool throws)
     {
-        var exception = Record.Exception(() => Contract.For(value).NotNullOrEmpty().Ok());
+        var exception = Record.Exception(() => Requirements.For(value).NotNullOrEmpty().Ok());
 
         var hasThrown = exception != null;
         hasThrown.Should().Be(throws);
@@ -38,7 +38,7 @@ public class StringTests
     [InlineData("     ", true)]
     public void NotNullEmptyWhitespace_Requirement_Successful_Asserts(string value, bool throws)
     {
-        var exception = Record.Exception(() => Contract.For(value).NotNullOrEmptyOrWhitespace().Ok());
+        var exception = Record.Exception(() => Requirements.For(value).NotNullOrEmptyOrWhitespace().Ok());
 
         var hasThrown = exception != null;
         hasThrown.Should().Be(throws);
@@ -49,7 +49,7 @@ public class StringTests
     {
         var target = "foo";
         var exception = Record.Exception(() =>
-            Contract.For(target)
+            Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
                 .NotNullOrEmptyOrWhitespace()
@@ -63,7 +63,7 @@ public class StringTests
     {
         var target = " ";
         var exception = Record.Exception(() =>
-            Contract.For(target)
+            Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
                 .NotNullOrEmptyOrWhitespace()
@@ -78,7 +78,7 @@ public class StringTests
         string? target = null;
 
         var exception = Record.Exception(() =>
-            Contract.For(target).Ok());
+            Requirements.For(target).Ok());
 
         exception.Should().BeNull();
     }

@@ -1,15 +1,15 @@
 ﻿namespace CodeContracts;
 
-public sealed class ContractObjectConditions : BaseConditions<object?>
+public sealed class ObjectRequirements : BaseRequirements<object?>
 {
-    internal ContractObjectConditions(object? target)
+    internal ObjectRequirements(object? target)
     {
         Target = target;
     }
 
     protected override object? Target { get; }
 
-    public ContractObjectConditions NotNull()
+    public ObjectRequirements NotNull()
     {
         UpdateConditions(o => o != null);
         return this;

@@ -1,27 +1,27 @@
 ﻿namespace CodeContracts;
 
-public sealed class ContractStringConditions : BaseConditions<string?>
+public sealed class StringRequirements : BaseRequirements<string?>
 {
-    internal ContractStringConditions(string? target)
+    internal StringRequirements(string? target)
     {
         Target = target;
     }
 
     protected override string? Target { get; }
 
-    public ContractStringConditions NotNull()
+    public StringRequirements NotNull()
     {
         UpdateConditions(o => o != null);
         return this;
     }
 
-    public ContractStringConditions NotNullOrEmpty()
+    public StringRequirements NotNullOrEmpty()
     {
         UpdateConditions(o => !string.IsNullOrEmpty(o));
         return this;
     }
 
-    public ContractStringConditions NotNullOrEmptyOrWhitespace()
+    public StringRequirements NotNullOrEmptyOrWhitespace()
     {
         UpdateConditions(o => !string.IsNullOrWhiteSpace(o));
         return this;

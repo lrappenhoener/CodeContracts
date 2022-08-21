@@ -10,7 +10,7 @@ public class EnumerableTests
     {
         IEnumerable? enumerable = null;
 
-        var exception = Record.Exception(() => Contract.For(enumerable).NotNull().Ok());
+        var exception = Record.Exception(() => Requirements.For(enumerable).NotNull().Ok());
 
         exception.Should().NotBeNull();
     }
@@ -20,7 +20,7 @@ public class EnumerableTests
     {
         IEnumerable enumerable = new ArrayList();
 
-        var exception = Record.Exception(() => Contract.For(enumerable).NotNull().Ok());
+        var exception = Record.Exception(() => Requirements.For(enumerable).NotNull().Ok());
 
         exception.Should().BeNull();
     }
@@ -30,7 +30,7 @@ public class EnumerableTests
     {
         IEnumerable? enumerable = null;
 
-        var exception = Record.Exception(() => Contract.For(enumerable).NotNullOrEmpty().Ok());
+        var exception = Record.Exception(() => Requirements.For(enumerable).NotNullOrEmpty().Ok());
 
         exception.Should().NotBeNull();
     }
@@ -40,7 +40,7 @@ public class EnumerableTests
     {
         IEnumerable enumerable = new ArrayList();
 
-        var exception = Record.Exception(() => Contract.For(enumerable).NotNullOrEmpty().Ok());
+        var exception = Record.Exception(() => Requirements.For(enumerable).NotNullOrEmpty().Ok());
 
         exception.Should().NotBeNull();
     }
@@ -50,7 +50,7 @@ public class EnumerableTests
     {
         IEnumerable enumerable = new ArrayList { "foo" };
 
-        var exception = Record.Exception(() => Contract.For(enumerable).NotNullOrEmpty().Ok());
+        var exception = Record.Exception(() => Requirements.For(enumerable).NotNullOrEmpty().Ok());
 
         exception.Should().BeNull();
     }
@@ -61,7 +61,7 @@ public class EnumerableTests
         var target = new ArrayList { "foo" };
 
         var exception = Record.Exception(() =>
-            Contract.For(target)
+            Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
                 .Ok());
@@ -76,7 +76,7 @@ public class EnumerableTests
         var target = new ArrayList();
 
         var exception = Record.Exception(() =>
-            Contract.For(target)
+            Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
                 .Ok());
@@ -90,7 +90,7 @@ public class EnumerableTests
         IEnumerable? target = null;
 
         var exception = Record.Exception(() =>
-            Contract.For(target).Ok());
+            Requirements.For(target).Ok());
 
         exception.Should().BeNull();
     }
