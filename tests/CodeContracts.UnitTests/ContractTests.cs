@@ -41,6 +41,18 @@ namespace CodeContracts.UnitTests
             exception.Should().BeNull();
         }
 
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void Ensures_Lambda_Successful_Validates(bool isValid)
+        {
+            bool Predicate() => isValid;
+
+            var resultIsValid = Record.Exception(() => Contract.Ensures(Predicate)) == null;
+
+            resultIsValid.Should().Be(isValid);
+        }
+
         [Fact]
         public void RequiresAll_Lambda_Successful_Validates_Valid_Collection()
         {
