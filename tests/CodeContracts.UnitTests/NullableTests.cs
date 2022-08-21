@@ -5,31 +5,32 @@ namespace CodeContracts.UnitTests;
 public class NullableTests
 {
     [Fact]
-    public void NotNull_Requirement_When_Null_Fails()
+    public void NotNull_Requirement_Successful_Validates_Null()
     {
         object? target = null;
-        var exception = Record.Exception(() => Requirements.For(target).NotNull().Ok());
 
-        exception.Should().NotBeNull();
+        var valid = Requirements.For(target).NotNull().Ok();
+
+        valid.Should().BeFalse();
     }
 
     [Fact]
-    public void NotNull_Requirement_When_NotNull_Successful()
+    public void NotNull_Requirement_Successful_Validates_NonNull()
     {
         var target = new object();
-        var exception = Record.Exception(() => Requirements.For(target).NotNull().Ok());
 
-        exception.Should().BeNull();
+        var valid = Requirements.For(target).NotNull().Ok();
+
+        valid.Should().BeTrue();
     }
 
     [Fact]
-    public void Ok_With_No_Requirements_Not_Throws()
+    public void Ok_With_No_Requirements_Returns_True()
     {
         object? target = null;
 
-        var exception = Record.Exception(() =>
-            Requirements.For(target).Ok());
+        var valid = Requirements.For(target).Ok();
 
-        exception.Should().BeNull();
+        valid.Should().BeTrue();
     }
 }

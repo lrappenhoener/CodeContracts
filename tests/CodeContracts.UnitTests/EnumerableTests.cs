@@ -6,92 +6,80 @@ namespace CodeContracts.UnitTests;
 public class EnumerableTests
 {
     [Fact]
-    public void NotNull_Requirement_When_Null_Throws()
+    public void NotNull_Requirement_Successful_Validates_Null_Value()
     {
         IEnumerable? enumerable = null;
 
-        var exception = Record.Exception(() => Requirements.For(enumerable).NotNull().Ok());
-
-        exception.Should().NotBeNull();
+        Requirements.For(enumerable).NotNull().Ok()
+            .Should().BeFalse();
     }
 
     [Fact]
-    public void NotNull_Requirement_When_Not_Null_Does_Not_Throw()
+    public void NotNull_Requirement_Successful_Validates_Non_Null_Value()
     {
         IEnumerable enumerable = new ArrayList();
 
-        var exception = Record.Exception(() => Requirements.For(enumerable).NotNull().Ok());
-
-        exception.Should().BeNull();
+        Requirements.For(enumerable).NotNull().Ok().Should().BeTrue();
     }
 
     [Fact]
-    public void NotNullOrEmpty_Requirement_When_Null_Throws()
+    public void NotNullOrEmpty_Requirement_Successful_Validates_Null_Value()
     {
         IEnumerable? enumerable = null;
 
-        var exception = Record.Exception(() => Requirements.For(enumerable).NotNullOrEmpty().Ok());
-
-        exception.Should().NotBeNull();
+        Requirements.For(enumerable).NotNullOrEmpty().Ok().Should().BeFalse();
     }
 
     [Fact]
-    public void NotNullOrEmpty_Requirement_When_Empty_Throws()
+    public void NotNullOrEmpty_Requirement_Successful_Validates_Empty_Value()
     {
         IEnumerable enumerable = new ArrayList();
 
-        var exception = Record.Exception(() => Requirements.For(enumerable).NotNullOrEmpty().Ok());
-
-        exception.Should().NotBeNull();
+        Requirements.For(enumerable).NotNullOrEmpty().Ok().Should().BeFalse();
     }
 
     [Fact]
-    public void NotNullOrEmpty_Requirement_When_Not_Empty_Does_Not_Throw()
+    public void NotNullOrEmpty_Requirement_Successful_Validates_Non_Empty_Value()
     {
         IEnumerable enumerable = new ArrayList { "foo" };
 
-        var exception = Record.Exception(() => Requirements.For(enumerable).NotNullOrEmpty().Ok());
-
-        exception.Should().BeNull();
+        Requirements.For(enumerable).NotNullOrEmpty().Ok().Should().BeTrue();
     }
 
     [Fact]
-    public void Multiple_Requirements_When_Valid_Does_Not_Throw()
+    public void Multiple_Requirements_Successful_Validates_Valid_Values()
     {
         var target = new ArrayList { "foo" };
 
-        var exception = Record.Exception(() =>
-            Requirements.For(target)
+        var valid = Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
-                .Ok());
+                .Ok();
 
-        exception.Should().BeNull();
+        valid.Should().BeTrue();
     }
 
     [Fact]
-    public void Multiple_Requirements_When_Not_All_Valid_Does_Throw()
+    public void Multiple_Requirements_Successful_Validates_Invalid_Values()
     {
         // ReSharper disable once CollectionNeverUpdated.Local
         var target = new ArrayList();
 
-        var exception = Record.Exception(() =>
-            Requirements.For(target)
+        var valid = Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
-                .Ok());
+                .Ok();
 
-        exception.Should().NotBeNull();
+        valid.Should().BeFalse();
     }
 
     [Fact]
-    public void Ok_With_No_Requirements_Not_Throws()
+    public void Ok_With_No_Requirements_Returns_True()
     {
         IEnumerable? target = null;
 
-        var exception = Record.Exception(() =>
-            Requirements.For(target).Ok());
+        var valid = Requirements.For(target).Ok();
 
-        exception.Should().BeNull();
+        valid.Should().BeTrue();
     }
 }

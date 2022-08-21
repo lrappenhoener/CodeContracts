@@ -130,155 +130,91 @@ public abstract class ComparableTests<T> where T : IComparable
     protected IEnumerable<Compare<T>> GreaterEqualsValuesThatAreInvalid { get; }
 
     [Fact]
-    public void Positive_Requirement_Successful_Asserts_Positive_Values()
+    public void Positive_Requirement_Successful_Validates_Positive_Values()
     {
-        foreach (var positiveValue in PositiveValues)
-        {
-            var exception = Record.Exception(() =>
-                Contract.For(positiveValue).Positive().Ok());
-
-            exception.Should().BeNull();
-        }
+        PositiveValues.All(v => Requirements.For(v).Positive().Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void Positive_Requirement_Successful_Asserts_Negative_Values()
+    public void Positive_Requirement_Successful_Validates_Negative_Values()
     {
-        foreach (var positiveValue in PositiveValues)
-        {
-            var exception = Record.Exception(() =>
-                Contract.For(positiveValue).Positive().Ok());
-
-            exception.Should().BeNull();
-        }
+        NegativeValues.All(v => !Requirements.For(v).Positive().Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void Negative_Requirement_Successful_Asserts_Negative_Values()
+    public void Negative_Requirement_Successful_Validates_Negative_Values()
     {
-        foreach (var negativeValue in NegativeValues)
-        {
-            var exception = Record.Exception(() =>
-                Contract.For(negativeValue).Negative().Ok());
-
-            exception.Should().BeNull();
-        }
+        NegativeValues.All(v => Requirements.For(v).Negative().Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void Negative_Requirement_Successful_Asserts_Positive_Values()
+    public void Negative_Requirement_Successful_Validates_Positive_Values()
     {
-        foreach (var negativeValue in NegativeValues)
-        {
-            var exception = Record.Exception(() =>
-                Contract.For(negativeValue).Negative().Ok());
-
-            exception.Should().BeNull();
-        }
+        PositiveValues.All(v => !Requirements.For(v).Negative().Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void InRange_Requirement_Successful_Asserts_ValidRanges()
+    public void InRange_Requirement_Successful_Validates_Valid_Ranges()
     {
-        foreach (var range in RangesThatAreValid)
-        {
-            var exception = Record.Exception(() => Contract.For(range.Value).InRange(range.Min, range.Max).Ok());
-            exception.Should().BeNull();
-        }
+        RangesThatAreValid.All(r => Requirements.For(r.Value).InRange(r.Min, r.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void InRange_Requirement_Successful_Asserts_InvalidRanges()
+    public void InRange_Requirement_Successful_Validates_Invalid_Ranges()
     {
-        foreach (var range in RangesThatAreInvalid)
-        {
-            var exception = Record.Exception(() => Contract.For(range.Value).InRange(range.Min, range.Max).Ok());
-            exception.Should().NotBeNull();
-        }
+        RangesThatAreInvalid.All(r => !Requirements.For(r.Value).InRange(r.Min, r.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void Lesser_Requirement_Successful_Asserts_ValidValues()
+    public void Lesser_Requirement_Successful_Validates_Valid_Values()
     {
-        foreach (var lesser in LesserValuesThatAreValid)
-        {
-            var exception = Record.Exception(() => Contract.For(lesser.Value).Lesser(lesser.Max).Ok());
-            exception.Should().BeNull();
-        }
+        LesserValuesThatAreValid.All(v => Requirements.For(v.Value).Lesser(v.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void Lesser_Requirement_Successful_Asserts_InvalidValues()
+    public void Lesser_Requirement_Successful_Validates_Invalid_Values()
     {
-        foreach (var lesser in LesserValuesThatAreInvalid)
-        {
-            var exception = Record.Exception(() => Contract.For(lesser.Value).Lesser(lesser.Max).Ok());
-            exception.Should().NotBeNull();
-        }
+        LesserValuesThatAreInvalid.All(v => !Requirements.For(v.Value).Lesser(v.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void Greater_Requirement_Successful_Asserts_ValidValues()
+    public void Greater_Requirement_Successful_Validates_Valid_Values()
     {
-        foreach (var greater in GreaterValuesThatAreValid)
-        {
-            var exception = Record.Exception(() => Contract.For(greater.Value).Greater(greater.Max).Ok());
-            exception.Should().BeNull();
-        }
+        GreaterValuesThatAreValid.All(greater => Requirements.For(greater.Value).Greater(greater.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void Greater_Requirement_Successful_Asserts_InvalidValues()
+    public void Greater_Requirement_Successful_Validates_Invalid_Values()
     {
-        foreach (var greater in GreaterValuesThatAreInvalid)
-        {
-            var exception = Record.Exception(() => Contract.For(greater.Value).Greater(greater.Max).Ok());
-            exception.Should().NotBeNull();
-        }
+        GreaterValuesThatAreInvalid.All(greater => !Requirements.For(greater.Value).Greater(greater.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void GreaterEquals_Requirement_Successful_Asserts_ValidValues()
+    public void GreaterEquals_Requirement_Successful_Validates_Valid_Values()
     {
-        foreach (var greaterEquals in GreaterEqualsValuesThatAreValid)
-        {
-            var exception =
-                Record.Exception(() => Contract.For(greaterEquals.Value).GreaterEquals(greaterEquals.Max).Ok());
-            exception.Should().BeNull();
-        }
+        GreaterEqualsValuesThatAreValid.All(greater => Requirements.For(greater.Value).GreaterEquals(greater.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void GreaterEquals_Requirement_Successful_Asserts_InvalidValues()
+    public void GreaterEquals_Requirement_Successful_Validates_Invalid_Values()
     {
-        foreach (var greaterEquals in GreaterEqualsValuesThatAreInvalid)
-        {
-            var exception =
-                Record.Exception(() => Contract.For(greaterEquals.Value).GreaterEquals(greaterEquals.Max).Ok());
-            exception.Should().NotBeNull();
-        }
+        GreaterEqualsValuesThatAreInvalid.All(greater => !Requirements.For(greater.Value).GreaterEquals(greater.Max).Ok()).Should().BeTrue();
     }
 
     [Fact]
-    public void LesserEquals_Requirement_Successful_Asserts_ValidValues()
+    public void LesserEquals_Requirement_Successful_Validates_Valid_Values()
     {
-        foreach (var lesserEquals in LesserEqualsValuesThatAreValid)
-        {
-            var exception =
-                Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
-            exception.Should().BeNull();
-        }
+        LesserEqualsValuesThatAreValid
+            .All(lesserEquals => Requirements.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok()).Should()
+            .BeTrue();
     }
 
     [Fact]
-    public void LesserEquals_Requirement_Successful_Asserts_InvalidValues()
+    public void LesserEquals_Requirement_Successful_Validates_InvalidValues()
     {
-        foreach (var lesserEquals in LesserEqualsValuesThatAreInvalid)
-        {
-            var exception =
-                Record.Exception(() => Contract.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok());
-            exception.Should().NotBeNull();
-        }
+        LesserEqualsValuesThatAreInvalid
+            .All(lesserEquals => !Requirements.For(lesserEquals.Value).LesserEquals(lesserEquals.Max).Ok()).Should()
+            .BeTrue();
     }
 
     [Fact]
@@ -286,8 +222,7 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         var target = Positive;
 
-        var exception = Record.Exception(() =>
-            Contract
+        var valid = Requirements
                 .For(target)
                 .Lesser(Max)
                 .Greater(Min)
@@ -295,9 +230,9 @@ public abstract class ComparableTests<T> where T : IComparable
                 .GreaterEquals(Positive)
                 .LesserEquals(Positive)
                 .Positive()
-                .Ok());
+                .Ok();
 
-        exception.Should().BeNull();
+        valid.Should().BeTrue();
     }
 
     [Fact]
@@ -305,8 +240,7 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         var target = Positive;
 
-        var exception = Record.Exception(() =>
-            Contract
+        var valid = Requirements
                 .For(target)
                 .Lesser(Max)
                 .Greater(Min)
@@ -315,9 +249,9 @@ public abstract class ComparableTests<T> where T : IComparable
                 .GreaterEquals(Positive)
                 .LesserEquals(Positive)
                 .Positive()
-                .Ok());
+                .Ok();
 
-        exception.Should().NotBeNull();
+        valid.Should().BeFalse();
     }
 
     [Fact]
@@ -325,9 +259,8 @@ public abstract class ComparableTests<T> where T : IComparable
     {
         var target = Positive;
 
-        var exception = Record.Exception(() =>
-            Contract.For(target).Ok());
+        var valid = Requirements.For(target).Ok();
 
-        exception.Should().BeNull();
+        valid.Should().BeTrue();
     }
 }

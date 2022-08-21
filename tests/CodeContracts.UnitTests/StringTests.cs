@@ -5,81 +5,78 @@ namespace CodeContracts.UnitTests;
 public class StringTests
 {
     [Theory]
-    [InlineData("Foo", false)]
-    [InlineData(null, true)]
-    [InlineData("", false)]
-    [InlineData("  ", false)]
-    public void NotNull_Requirement_Successful_Asserts(string value, bool throws)
+    [InlineData("Foo", true)]
+    [InlineData(null, false)]
+    [InlineData("", true)]
+    [InlineData("  ", true)]
+    public void NotNull_Requirement_Successful_Validates(string value, bool throws)
     {
-        var exception = Record.Exception(() => Requirements.For(value).NotNull().Ok());
-
-        var hasThrown = exception != null;
-        hasThrown.Should().Be(throws);
+        var valid = Requirements.For(value).NotNull().Ok();
+        
+        valid.Should().Be(throws);
     }
 
     [Theory]
-    [InlineData("Foo", false)]
-    [InlineData(null, true)]
-    [InlineData("", true)]
-    [InlineData("  ", false)]
+    [InlineData("Foo", true)]
+    [InlineData(null, false)]
+    [InlineData("", false)]
+    [InlineData("  ", true)]
     public void NotNullOrEmpty_Requirement_Successful_Asserts(string value, bool throws)
     {
-        var exception = Record.Exception(() => Requirements.For(value).NotNullOrEmpty().Ok());
-
-        var hasThrown = exception != null;
-        hasThrown.Should().Be(throws);
+        var valid = Requirements.For(value).NotNullOrEmpty().Ok();
+        
+        valid.Should().Be(throws);
     }
 
     [Theory]
-    [InlineData("Foo", false)]
-    [InlineData(null, true)]
-    [InlineData("", true)]
-    [InlineData(" ", true)]
-    [InlineData("     ", true)]
+    [InlineData("Foo", true)]
+    [InlineData(null, false)]
+    [InlineData("", false)]
+    [InlineData(" ", false)]
+    [InlineData("     ", false)]
     public void NotNullEmptyWhitespace_Requirement_Successful_Asserts(string value, bool throws)
     {
-        var exception = Record.Exception(() => Requirements.For(value).NotNullOrEmptyOrWhitespace().Ok());
-
-        var hasThrown = exception != null;
-        hasThrown.Should().Be(throws);
+        var valid = Requirements.For(value).NotNullOrEmptyOrWhitespace().Ok();
+        
+        valid.Should().Be(throws);
     }
 
     [Fact]
-    public void Multiple_Requirements_When_All_Valid_Does_Not_Throw()
+    public void Multiple_Requirements_Successful_Validates_Valid_Value()
     {
         var target = "foo";
-        var exception = Record.Exception(() =>
+        var valid = 
             Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
                 .NotNullOrEmptyOrWhitespace()
-                .Ok());
+                .Ok();
 
-        exception.Should().BeNull();
+        valid.Should().BeTrue();
     }
 
     [Fact]
-    public void Multiple_Requirements_When_Not_All_Valid_Does_Throw()
+    public void Multiple_Requirements_Successful_Validates_Invalid_Value()
     {
         var target = " ";
-        var exception = Record.Exception(() =>
+        var valid = 
             Requirements.For(target)
                 .NotNull()
                 .NotNullOrEmpty()
                 .NotNullOrEmptyOrWhitespace()
-                .Ok());
+                .Ok();
 
-        exception.Should().NotBeNull();
+        valid.Should().BeFalse();
     }
 
     [Fact]
-    public void Ok_With_No_Requirements_Not_Throws()
+    public void Ok_With_No_Requirements_Returns_True()
     {
         string? target = null;
 
-        var exception = Record.Exception(() =>
-            Requirements.For(target).Ok());
+        var valid = 
+            Requirements.For(target).Ok();
 
-        exception.Should().BeNull();
+        valid.Should().BeTrue();
     }
 }
