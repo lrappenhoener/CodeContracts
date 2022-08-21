@@ -2,7 +2,7 @@
 
 public sealed class ContractObjectConditions : BaseConditions<object?>
 {
-    public ContractObjectConditions(object? target)
+    internal ContractObjectConditions(object? target)
     {
         Target = target;
     }
