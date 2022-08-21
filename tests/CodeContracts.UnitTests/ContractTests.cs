@@ -53,6 +53,19 @@ namespace CodeContracts.UnitTests
             resultIsValid.Should().BeFalse();
         }
 
+        [Fact]
+        public void RequiresAll_Successful_Validates_Valid_Collection()
+        {
+            var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
+
+            var resultIsValid = Record.Exception(() => Contract.RequiresAll(collection, Requirements
+                .For(collection.First())
+                .Greater(0)
+                .Lesser(21))) == null;
+
+            resultIsValid.Should().BeTrue();
+        }
+
         private List<bool> CreateInvalidBoolCollection()
         {
             var collection = CreateValidBoolCollection();
