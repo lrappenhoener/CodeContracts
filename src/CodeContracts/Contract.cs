@@ -48,5 +48,11 @@ namespace CodeContracts
             Debug.WriteLine(false, message);
             throw new CodeContractException(message);
         }
+
+        [Conditional("DEBUG")]
+        public static void EnsuresAll<T>(IEnumerable<T> collection, Func<T,bool> predicate, string message = "")
+        {
+            RequiresAll(collection, predicate, message);
+        }
     }
 }
