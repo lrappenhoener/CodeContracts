@@ -65,6 +65,17 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
+        public void EnsuresAll_Lambda_Successful_Validates_Valid_Collection()
+        {
+            var collection = CreateValidBoolCollection();
+            bool Predicate(bool d) => d;
+
+            var resultIsValid = Record.Exception(() => Contract.EnsuresAll(collection, Predicate)) == null;
+
+            resultIsValid.Should().BeTrue();
+        }
+
+        [Fact]
         public void RequiresAll_Lambda_Successful_Validates_Invalid_Collection()
         {
             var collection = CreateInvalidBoolCollection();
