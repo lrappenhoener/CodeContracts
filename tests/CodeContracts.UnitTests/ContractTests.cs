@@ -19,7 +19,25 @@ namespace CodeContracts.UnitTests
             exception.Should().BeNull();
         }
 
-        private ContractRequirements<double> CreateValidRequirements()
+        [Fact]
+        public void Requires_Successful_Validates_Invalid_Requirements()
+        {
+            var requirements = CreateInvalidRequirements();
+    
+            var exception = Record.Exception(() => Contract.Requires(requirements));
+
+            exception.Should().NotBeNull();
+        }
+
+        private ContractRequirements<double> CreateInvalidRequirements()
+        {
+            var requirements = CreateValidRequirements()
+                .Negative();
+
+            return requirements;
+        }
+
+        private ComparableRequirements<double> CreateValidRequirements()
         {
             var target = 50.0d;
 
