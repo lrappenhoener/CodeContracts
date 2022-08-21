@@ -21,7 +21,7 @@ public abstract class ComparableTests<T> where T : IComparable
             Min
         };
 
-        RangesThatAreValid = new List<Range>
+        RangesThatAreValid = new List<Range<T>>
         {
             new(Zero, Negative, Positive),
             new(Zero, Min, Max),
@@ -30,20 +30,20 @@ public abstract class ComparableTests<T> where T : IComparable
             new(Negative, Min, Positive)
         };
 
-        RangesThatAreInvalid = new List<Range>
+        RangesThatAreInvalid = new List<Range<T>>
         {
             new(Zero, Positive, Max),
             new(Zero, Min, Negative)
         };
 
-        LesserValuesThatAreValid = new List<Compare>
+        LesserValuesThatAreValid = new List<Compare<T>>
         {
             new(Zero, Positive),
             new(Negative, Zero),
             new(Positive, Max)
         };
 
-        LesserValuesThatAreInvalid = new List<Compare>
+        LesserValuesThatAreInvalid = new List<Compare<T>>
         {
             new(Positive, Zero),
             new(Positive, Positive),
@@ -53,7 +53,7 @@ public abstract class ComparableTests<T> where T : IComparable
             new(Max, Max)
         };
 
-        LesserEqualsValuesThatAreValid = new List<Compare>
+        LesserEqualsValuesThatAreValid = new List<Compare<T>>
         {
             new(Zero, Positive),
             new(Zero, Zero),
@@ -65,21 +65,21 @@ public abstract class ComparableTests<T> where T : IComparable
             new(Max, Max)
         };
 
-        LesserEqualsValuesThatAreInvalid = new List<Compare>
+        LesserEqualsValuesThatAreInvalid = new List<Compare<T>>
         {
             new(Positive, Zero),
             new(Zero, Negative),
             new(Max, Positive)
         };
 
-        GreaterValuesThatAreValid = new List<Compare>
+        GreaterValuesThatAreValid = new List<Compare<T>>
         {
             new(Positive, Zero),
             new(Zero, Negative),
             new(Max, Positive)
         };
 
-        GreaterValuesThatAreInvalid = new List<Compare>
+        GreaterValuesThatAreInvalid = new List<Compare<T>>
         {
             new(Zero, Positive),
             new(Zero, Zero),
@@ -91,7 +91,7 @@ public abstract class ComparableTests<T> where T : IComparable
             new(Min, Min)
         };
 
-        GreaterEqualsValuesThatAreValid = new List<Compare>
+        GreaterEqualsValuesThatAreValid = new List<Compare<T>>
         {
             new(Positive, Zero),
             new(Positive, Positive),
@@ -101,7 +101,7 @@ public abstract class ComparableTests<T> where T : IComparable
             new(Max, Max)
         };
 
-        GreaterEqualsValuesThatAreInvalid = new List<Compare>
+        GreaterEqualsValuesThatAreInvalid = new List<Compare<T>>
         {
             new(Zero, Positive),
             new(Negative, Zero),
@@ -118,16 +118,16 @@ public abstract class ComparableTests<T> where T : IComparable
 
     protected IEnumerable<T> PositiveValues { get; }
     protected IEnumerable<T> NegativeValues { get; }
-    protected IEnumerable<Range> RangesThatAreValid { get; }
-    protected IEnumerable<Range> RangesThatAreInvalid { get; }
-    protected IEnumerable<Compare> LesserValuesThatAreValid { get; }
-    protected IEnumerable<Compare> LesserValuesThatAreInvalid { get; }
-    protected IEnumerable<Compare> LesserEqualsValuesThatAreValid { get; }
-    protected IEnumerable<Compare> LesserEqualsValuesThatAreInvalid { get; }
-    protected IEnumerable<Compare> GreaterValuesThatAreValid { get; }
-    protected IEnumerable<Compare> GreaterValuesThatAreInvalid { get; }
-    protected IEnumerable<Compare> GreaterEqualsValuesThatAreValid { get; }
-    protected IEnumerable<Compare> GreaterEqualsValuesThatAreInvalid { get; }
+    protected IEnumerable<Range<T>> RangesThatAreValid { get; }
+    protected IEnumerable<Range<T>> RangesThatAreInvalid { get; }
+    protected IEnumerable<Compare<T>> LesserValuesThatAreValid { get; }
+    protected IEnumerable<Compare<T>> LesserValuesThatAreInvalid { get; }
+    protected IEnumerable<Compare<T>> LesserEqualsValuesThatAreValid { get; }
+    protected IEnumerable<Compare<T>> LesserEqualsValuesThatAreInvalid { get; }
+    protected IEnumerable<Compare<T>> GreaterValuesThatAreValid { get; }
+    protected IEnumerable<Compare<T>> GreaterValuesThatAreInvalid { get; }
+    protected IEnumerable<Compare<T>> GreaterEqualsValuesThatAreValid { get; }
+    protected IEnumerable<Compare<T>> GreaterEqualsValuesThatAreInvalid { get; }
 
     [Fact]
     public void Positive_Requirement_Successful_Asserts_Positive_Values()

@@ -1,13 +1,13 @@
 ﻿namespace CodeContracts.UnitTests;
 
-public class Compare
+public class Compare<T> where T : IComparable
 {
-    public Compare(IComparable value, IComparable max)
+    public Compare(T value, T max)
     {
         Value = value;
         Max = max;
     }
 
-    public IComparable Value { get; }
-    public IComparable Max { get; }
+    public T Value { get; }
+    public T Max { get; }
 }

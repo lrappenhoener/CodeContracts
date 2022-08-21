@@ -1,15 +1,15 @@
 ﻿namespace CodeContracts.UnitTests;
 
-public class Range
+public class Range<T> where T : IComparable
 {
-    public Range(IComparable value, IComparable min, IComparable max)
+    public Range(T value, T min, T max)
     {
         Value = value;
         Min = min;
         Max = max;
     }
 
-    public IComparable Value { get; }
-    public IComparable Min { get; }
-    public IComparable Max { get; }
+    public T Value { get; }
+    public T Min { get; }
+    public T Max { get; }
 }
