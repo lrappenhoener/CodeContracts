@@ -28,5 +28,13 @@ namespace CodeContracts
             Debug.WriteLine(false, message);
             throw new CodeContractException(message);
         }
+
+        [Conditional("DEBUG")]
+        public static void RequiresAll<T>(IEnumerable<T> collection, ContractRequirements<T> requirements, string message = "")
+        {
+            if (collection.All(requirements.Ok)) return;
+            Debug.WriteLine(false, message);
+            throw new CodeContractException(message);
+        }
     }
 }
