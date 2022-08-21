@@ -32,7 +32,7 @@ namespace CodeContracts.UnitTests
         }
 
         [Fact]
-        public void RequiresAll_Lambda_Successful_Validates()
+        public void RequiresAll_Lambda_Successful_Validates_Valid_Collection()
         {
             var collection = CreateTrueBoolCollection();
             bool Predicate(bool d) => d;
