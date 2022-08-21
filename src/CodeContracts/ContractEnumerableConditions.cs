@@ -4,7 +4,7 @@ namespace CodeContracts;
 
 public sealed class ContractEnumerableConditions : BaseConditions<IEnumerable?>
 {
-    public ContractEnumerableConditions(IEnumerable? target)
+    internal ContractEnumerableConditions(IEnumerable? target)
     {
         Target = target;
     }
