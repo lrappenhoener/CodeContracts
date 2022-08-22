@@ -9,6 +9,8 @@ namespace CodeContracts.UnitTests
 {
     public class ContractTests
     {
+        private const string ExpectedAssertException = "Microsoft.VisualStudio.TestPlatform.TestHost.DebugAssertException";
+
         [Fact]
         public void Requires_Successful_Validates_Valid_Requirements()
         {
@@ -19,18 +21,93 @@ namespace CodeContracts.UnitTests
             exception.Should().BeNull();
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Requires_Lambda_Successful_Validates(bool isValid)
+        [Fact]
+        public void Requires_Successful_Validates_Invalid_Requirements()
         {
-            bool Predicate() => isValid;
+            var (target, requirements) = CreateInvalidRequirements();
+    
+            var exception = Record.Exception(() => Contract.Requires(target, requirements));
 
-            var resultIsValid = Record.Exception(() => Contract.Requires(Predicate)) == null;
-
-            resultIsValid.Should().Be(isValid);
+            exception.Should().NotBeNull();
+            exception?.GetType().ToString().Should()
+                .Be(ExpectedAssertException);
         }
 
+        [Fact]
+        public void Requires_Lambda_Successful_Validates_Valid_Requirements()
+        {
+            bool Predicate() => true;
+
+            var exception = Record.Exception(() => Contract.Requires(Predicate));
+
+            exception.Should().BeNull();
+        }
+
+        [Fact]
+        public void Requires_Lambda_Successful_Validates_Invalid_Requirements()
+        {
+            bool Predicate() => false;
+
+            var exception = Record.Exception(() => Contract.Requires(Predicate));
+
+            exception.Should().NotBeNull();
+            exception?.GetType().ToString().Should()
+                .Be(ExpectedAssertException);
+        }
+
+        [Fact]
+        public void RequiresAll_Lambda_Successful_Validates_Valid_Requirements_For_Each_Element()
+        {
+            var collection = CreateValidBoolCollection();
+            bool Predicate(bool d) => d;
+
+            var exception = Record.Exception(() => Contract.RequiresAll(collection, Predicate));
+
+            exception.Should().BeNull();
+        }
+
+        [Fact]
+        public void RequiresAll_Lambda_Successful_Validates_Invalid_Requirements_For_Each_Element()
+        {
+            var collection = CreateInvalidBoolCollection();
+            bool Predicate(bool d) => d;
+
+            var exception = Record.Exception(() => Contract.RequiresAll(collection, Predicate));
+
+            exception.Should().NotBeNull();
+            exception?.GetType().ToString().Should()
+                .Be(ExpectedAssertException);
+        }
+
+        [Fact]
+        public void RequiresAll_Successful_Validates_Valid_Requirements_For_Each_Element()
+        {
+            var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
+
+            var exception = Record.Exception(() => Contract.RequiresAll(collection, Requirements
+                .For(collection.First())
+                .Greater(0)
+                .Lesser(21)));
+
+            exception.Should().BeNull();
+        }
+
+        [Fact]
+        public void RequiresAll_Successful_Validates_Invalid_Requirements_For_Each_Element()
+        {
+            var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
+
+            var exception = Record.Exception(() => Contract.RequiresAll(collection, Requirements
+                .For(collection.First())
+                .Greater(0)
+                .Lesser(21)
+                .Negative()));
+
+            exception.Should().NotBeNull();
+            exception?.GetType().ToString().Should()
+                .Be(ExpectedAssertException);
+        }
+        
         [Fact]
         public void Ensures_Successful_Validates_Valid_Requirements()
         {
@@ -41,91 +118,81 @@ namespace CodeContracts.UnitTests
             exception.Should().BeNull();
         }
 
-        [Theory]
-        [InlineData(true)]
-        [InlineData(false)]
-        public void Ensures_Lambda_Successful_Validates(bool isValid)
+        [Fact]
+        public void Ensures_Lambda_Successful_Validates_Valid_Requirements()
         {
-            bool Predicate() => isValid;
+            bool Predicate() => true;
 
-            var resultIsValid = Record.Exception(() => Contract.Ensures(Predicate)) == null;
+            var exception = Record.Exception(() => Contract.Requires(Predicate));
 
-            resultIsValid.Should().Be(isValid);
+            exception.Should().BeNull();
         }
 
         [Fact]
-        public void RequiresAll_Lambda_Successful_Validates_Valid_Collection()
+        public void Ensures_Lambda_Successful_Validates_Invalid_Requirements()
+        {
+            bool Predicate() => false;
+
+            var exception = Record.Exception(() => Contract.Requires(Predicate));
+
+            exception.Should().NotBeNull();
+            exception?.GetType().ToString().Should()
+                .Be(ExpectedAssertException);
+        }
+
+        [Fact]
+        public void EnsuresAll_Lambda_Successful_Validates_Valid_Requirements_For_Each_Element()
         {
             var collection = CreateValidBoolCollection();
             bool Predicate(bool d) => d;
 
-            var resultIsValid = Record.Exception(() => Contract.RequiresAll(collection, Predicate)) == null;
+            var exception = Record.Exception(() => Contract.EnsuresAll(collection, Predicate));
 
-            resultIsValid.Should().BeTrue();
+            exception.Should().BeNull();
         }
 
         [Fact]
-        public void EnsuresAll_Lambda_Successful_Validates_Valid_Collection()
-        {
-            var collection = CreateValidBoolCollection();
-            bool Predicate(bool d) => d;
-
-            var resultIsValid = Record.Exception(() => Contract.EnsuresAll(collection, Predicate)) == null;
-
-            resultIsValid.Should().BeTrue();
-        }
-
-        [Fact]
-        public void RequiresAll_Lambda_Successful_Validates_Invalid_Collection()
+        public void EnsuresAll_Lambda_Successful_Validates_Invalid_Requirements_For_Each_Element()
         {
             var collection = CreateInvalidBoolCollection();
             bool Predicate(bool d) => d;
 
-            var resultIsValid = Record.Exception(() => Contract.RequiresAll(collection, Predicate)) == null;
+            var exception = Record.Exception(() => Contract.EnsuresAll(collection, Predicate));
 
-            resultIsValid.Should().BeFalse();
+            exception.Should().NotBeNull();
+            exception?.GetType().ToString().Should()
+                .Be(ExpectedAssertException);
         }
 
         [Fact]
-        public void RequiresAll_Successful_Validates_Valid_Collection()
+        public void EnsuresAll_Successful_Validates_Valid_Requirements_For_Each_Element()
         {
             var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
 
-            var resultIsValid = Record.Exception(() => Contract.RequiresAll(collection, Requirements
+            var exception = Record.Exception(() => Contract.EnsuresAll(collection, Requirements
                 .For(collection.First())
                 .Greater(0)
-                .Lesser(21))) == null;
+                .Lesser(21)));
 
-            resultIsValid.Should().BeTrue();
+            exception.Should().BeNull();
         }
 
         [Fact]
-        public void EnsuresAll_Successful_Validates_Valid_Collection()
+        public void EnsuresAll_Successful_Validates_Invalid_Requirements_For_Each_Element()
         {
             var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
 
-            var resultIsValid = Record.Exception(() => Contract.EnsuresAll(collection, Requirements
-                .For(collection.First())
-                .Greater(0)
-                .Lesser(21))) == null;
-
-            resultIsValid.Should().BeTrue();
-        }
-
-        [Fact]
-        public void RequiresAll_Successful_Validates_Invalid_Collection()
-        {
-            var collection = Enumerable.Range(1, 20).Select(i => (double)i).ToList();
-
-            var resultIsValid = Record.Exception(() => Contract.RequiresAll(collection, Requirements
+            var exception = Record.Exception(() => Contract.EnsuresAll(collection, Requirements
                 .For(collection.First())
                 .Greater(0)
                 .Lesser(21)
-                .Negative())) == null;
+                .Negative()));
 
-            resultIsValid.Should().BeFalse();
+            exception.Should().NotBeNull();
+            exception?.GetType().ToString().Should()
+                .Be(ExpectedAssertException);
         }
-
+        
         private List<bool> CreateInvalidBoolCollection()
         {
             var collection = CreateValidBoolCollection();
@@ -136,16 +203,6 @@ namespace CodeContracts.UnitTests
         private static List<bool> CreateValidBoolCollection()
         {
             return Enumerable.Range(1, 20).Select(i => true).ToList();
-        }
-
-        [Fact]
-        public void Requires_Successful_Validates_Invalid_Requirements()
-        {
-            var (target, requirements) = CreateInvalidRequirements();
-    
-            var exception = Record.Exception(() => Contract.Requires(target, requirements));
-
-            exception.Should().NotBeNull();
         }
 
         private (double, ComparableRequirements<double>) CreateInvalidRequirements()
