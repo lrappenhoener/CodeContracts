@@ -1,6 +1,6 @@
 # CodeContracts
 
-Experiment to implement "Design by Contract" by Bertrand Meyer, inspired by Zoran Horvat Course "Writing Highly Maintainable Unit Tests"
+Small experimental library to implement "Design by Contract" by Bertrand Meyer, inspired by Zoran Horvat Course "Writing Highly Maintainable Unit Tests"
 
 Example:
 ```
