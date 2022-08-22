@@ -3,7 +3,7 @@
 Experiment to implement "Design by Contract" by Bertrand Meyer, inspired by Zoran Horvat Course "Writing Highly Maintainable Unit Tests"
 
 Example:
-
+```
 public double AddNumbersBetween_1_And_100(double first, double second)
 {
     // Check if the method is defined for the input
@@ -20,3 +20,4 @@ public double AddNumbersBetween_1_And_100(double first, double second)
     // by Lambda
     Contract.Ensures(() => result >= 0);
 }
+```
